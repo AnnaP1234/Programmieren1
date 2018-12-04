@@ -2,7 +2,7 @@ class Spielfeld {
     
 // region vars
 
-    private char[] spielfeld;
+    private char[][] spielfeld;
     private int spielzug;
 
 // endregion vars
@@ -15,7 +15,7 @@ class Spielfeld {
     *  Zu Beginn des Spiels ist die Zuganzahl 0.
     */
     public Spielfeld() {
-        char[9] pSpielfeld = new char[];
+        char[][] pSpielfeld = new char[3][3];
         spielfeld = pSpielfeld;
         spielzug = 0;
     }
@@ -34,17 +34,17 @@ class Spielfeld {
     */
     public void spielen() {
         aktuellesSpielfeldAusgeben();
-        for (int i = 0; i < 5, i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println("Spieler " + spielerAmZug() + " ist am Zug.");
             //Reader
             //Ausgabe nach Eingabe
             spielzug ++;
         }
-        while ( ueberpruefeSpielstand(x, y) == 0) {
+        /*while ( ueberpruefeSpielstand(x, y) == 0) {
             // SpielerAmZug
             // Spielverlauf
-        }
-        System.out.println(spielstand());
+        }*/
+        System.out.println(spielstand(1));
     }
 
     /*
@@ -62,7 +62,6 @@ class Spielfeld {
     *  Überprüft, ob die Eingabe das Spiel durch Sieg oder Unentschieden beendet.
     */
     public int ueberpruefeSpielstand(int x, int y) {
-        int ergebnis = 0;
         if ( (x + y) == 2 || (x + y) == 4 || (x + y) == 0) {
             if (pruefeDiagonal()) {
                 return 1;
@@ -77,6 +76,7 @@ class Spielfeld {
         if (spielzug == 9) {
             return 2;
         }
+        return 0;
     }
 
     /*
@@ -101,23 +101,23 @@ class Spielfeld {
     }
 
     /*
-    *  Gibt den aktuellen Stand des Spielfelds auf der Konsole aus.
+    *  Gibt den aktuellen Stand des Spielfelds als String wieder.
     */
-    public String aktuellesSpielfeldAusgeben() {
+    public void aktuellesSpielfeldAusgeben() {
         String tabelle = "----------";
-        String ausgabe = tabelle + "\\n";
+        System.out.println(tabelle);
 
-        for (int i = 0; i <= spielfeld.Length(); i++) {
-            if (spielfeld[i] != '') {
-                ausgabe += "| " + spielfeld[i];
-            } else {
-                ausgabe += "|  ";
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                if (spielfeld[x][y] != 0) {
+                    System.out.print("| " + spielfeld[x][y]);
+                } else {
+                    System.out.print("|  ");
+                }
             }
-            if ((i % 3) == 2) {
-                ausgabe += "| \\n" + tabelle;
-            }
+            System.out.println("| ");
+            System.out.println(tabelle);
         }
-        return ausgabe;
     }
 
     /*
