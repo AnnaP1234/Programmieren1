@@ -22,7 +22,7 @@ public class Reader2 {
         int y = sc.nextInt();
         
         if (!isOk(x, y)) {
-            System.out.println("Die Werte müssen zwischen 0 und 2 liegen.");
+            System.out.println("Die Werte sollten zwischen 0 und 2 liegen.");
             return readKoord();
         }
 
