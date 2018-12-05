@@ -34,12 +34,14 @@ class Spielfeld {
     *  Da das Spiel noch nicht in den ersten Zügen abgeschlossen werden kann, muss nicht untersucht werden, ob das Spiel beendet ist.
     *  In den nachfolgenden Zügen ist dies hingegen möglich. Das Spiel läuft nur solange bis es einen Sieger oder ein Unentschieden gibt.
     */
+
+    // redundanter Code!!!!
     public void spielen() {
         aktuellesSpielfeldAusgeben();
-        for (int i = 0; i < 9; i++) {
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < 4; i++) {
             System.out.println("Spieler " + spielerAmZug() + " ist am Zug.");
-            int x;
-            int y;
             do {
                 Point point = reader.readKoord();
                 x = point.getX();
@@ -52,11 +54,23 @@ class Spielfeld {
             aktuellesSpielfeldAusgeben();
             spielzug ++;
         }
-        /*while ( ueberpruefeSpielstand(x, y) == 0) {
+        while ( ueberpruefeSpielstand(y, x) == 0) {
+            do {
+                Point point = reader.readKoord();
+                x = point.getX();
+                y = point.getY();
+                if (!isOk(x, y)) {
+                    System.out.println("Feld ist bereits belegt.");
+                }
+            } while (!isOk(x, y));
             // SpielerAmZug
+            spielfeld[x][y] = getSymbol();
+            aktuellesSpielfeldAusgeben();
+            spielzug ++;
             // Spielverlauf
-        }*/
-        System.out.println(spielstand(1));
+        }
+        spielzug --;
+        System.out.println(spielstand(ueberpruefeSpielstand(y, x)));
     }
 
     private boolean isOk(int x, int y) {
@@ -79,9 +93,9 @@ class Spielfeld {
 
     public char getSymbol() {
         if (spielerAmZug() == 1) {
-            return 'X';
+            return 'x';
         }
-        return 'O';
+        return 'o';
     }
 
     /*
@@ -112,6 +126,7 @@ class Spielfeld {
         if ((spielfeld[zeile][0]=='x' || spielfeld[zeile][0]=='o') && spielfeld[zeile][0]==spielfeld[zeile][1] && spielfeld[zeile][0]==spielfeld[zeile][2]) {
             return true;
         }
+        return false;
     }
 
     /*
@@ -121,6 +136,7 @@ class Spielfeld {
         if ((spielfeld[0][spalte]=='x' || spielfeld[0][spalte]=='o') && spielfeld[0][spalte]==spielfeld[1][spalte] && spielfeld[0][spalte]==spielfeld[2][spalte]) {
             return true;
         }
+        return false;
     }
 
     /*
@@ -130,9 +146,10 @@ class Spielfeld {
         if ((spielfeld[0][0]=='x' || spielfeld[0][0]=='o') && spielfeld[0][0]==spielfeld[1][1] && spielfeld[0][0]==spielfeld[2][2]) {
             return true;
         }
-        if ((spielfeld[0][3]=='x' || spielfeld[0][3]=='o') && spielfeld[0][0]==spielfeld[1][1] && spielfeld[0][0]==spielfeld[2][2]) {
+        if ((spielfeld[0][2]=='x' || spielfeld[0][2]=='o') && spielfeld[2][0]==spielfeld[1][1] && spielfeld[0][2]==spielfeld[2][2]) {
             return true;
         }
+        return false;
     }
 
     /*
@@ -162,7 +179,7 @@ class Spielfeld {
     public String spielstand(int stand) {
         switch (stand) {
             case 1:
-                return "Spieler " + spielerAmZug() + " hat gewonnen. Herzlichen Glückwunsch";
+                return "Spieler " + spielerAmZug() + " hat gewonnen.";
                 
             case 2:
                 return "Unentschieden";
