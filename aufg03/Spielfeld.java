@@ -109,21 +109,30 @@ class Spielfeld {
     *  Prüft, ob das Spielfeld in der übergebenen Zeile gewonnen wurde.
     */
     public boolean pruefeZeile(int zeile) {
-        return true;
+        if ((spielfeld[zeile][0]=='x' || spielfeld[zeile][0]=='o') && spielfeld[zeile][0]==spielfeld[zeile][1] && spielfeld[zeile][0]==spielfeld[zeile][2]) {
+            return true;
+        }
     }
 
     /*
     *  Prüft, ob das Spielfeld in der übergebenen Spalte gewonnen wurde.
     */
     public boolean pruefeSpalte(int spalte) {
-        return true;
+        if ((spielfeld[0][spalte]=='x' || spielfeld[0][spalte]=='o') && spielfeld[0][spalte]==spielfeld[1][spalte] && spielfeld[0][spalte]==spielfeld[2][spalte]) {
+            return true;
+        }
     }
 
     /*
     *  Prüft, ob das Spielfeld in einer der Diagonalen gewonnen wurde.
     */
     public boolean pruefeDiagonal() {
-        return true;
+        if ((spielfeld[0][0]=='x' || spielfeld[0][0]=='o') && spielfeld[0][0]==spielfeld[1][1] && spielfeld[0][0]==spielfeld[2][2]) {
+            return true;
+        }
+        if ((spielfeld[0][3]=='x' || spielfeld[0][3]=='o') && spielfeld[0][0]==spielfeld[1][1] && spielfeld[0][0]==spielfeld[2][2]) {
+            return true;
+        }
     }
 
     /*
