@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 /*
-* Die Klasse Reader enthält die Aufforderung die Koordinaten der Spieler in * die Konsole einzugeben und diese anschließend als Integer zu speichern
+* Die Klasse Reader enthält die Aufforderung die Koordinaten der Spieler in 
+* die Konsole einzugeben und diese anschließend als Integer zu speichern
 */
 public class Reader {
     //bin mir hier nicht sicher wieso static aber hat er mir beim kompilieren vorgeschlagen

@@ -4,6 +4,7 @@ class Spielfeld {
 
     private char[][] spielfeld;
     private int spielzug;
+    private Reader2 reader;
 
 // endregion vars
 
@@ -11,13 +12,14 @@ class Spielfeld {
 
     /*
     *  Eine Instanze der Spielfeldklasse wird erstellt
-    *  Da die Größe des Spielfelds festgelegt ist, wird diese konstant auf 9 gesetzt
+    *  Da die Größe des Spielfelds festgelegt ist, wird diese konstant auf 3x3 gesetzt
     *  Zu Beginn des Spiels ist die Zuganzahl 0.
     */
     public Spielfeld() {
         char[][] pSpielfeld = new char[3][3];
         spielfeld = pSpielfeld;
         spielzug = 0;
+        reader = new Reader2();
     }
 
 // endregion ctor
@@ -34,10 +36,20 @@ class Spielfeld {
     */
     public void spielen() {
         aktuellesSpielfeldAusgeben();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 9; i++) {
             System.out.println("Spieler " + spielerAmZug() + " ist am Zug.");
-            //Reader
-            //Ausgabe nach Eingabe
+            int x;
+            int y;
+            do {
+                Point point = reader.readKoord();
+                x = point.getX();
+                y = point.getY();
+                if (!isOk(x, y)) {
+                    System.out.println("Feld ist bereits belegt.");
+                }
+            } while (!isOk(x, y));
+            spielfeld[x][y] = getSymbol();
+            aktuellesSpielfeldAusgeben();
             spielzug ++;
         }
         /*while ( ueberpruefeSpielstand(x, y) == 0) {
@@ -45,6 +57,13 @@ class Spielfeld {
             // Spielverlauf
         }*/
         System.out.println(spielstand(1));
+    }
+
+    private boolean isOk(int x, int y) {
+        if (spielfeld[x][y] == 0) {
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -56,6 +75,13 @@ class Spielfeld {
             return 1;
         }
         return 2;
+    }
+
+    public char getSymbol() {
+        if (spielerAmZug() == 1) {
+            return 'X';
+        }
+        return 'O';
     }
 
     /*
@@ -104,15 +130,15 @@ class Spielfeld {
     *  Gibt den aktuellen Stand des Spielfelds als String wieder.
     */
     public void aktuellesSpielfeldAusgeben() {
-        String tabelle = "----------";
+        String tabelle = "-------------";
         System.out.println(tabelle);
 
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 if (spielfeld[x][y] != 0) {
-                    System.out.print("| " + spielfeld[x][y]);
+                    System.out.print("| " + spielfeld[x][y] + " ");
                 } else {
-                    System.out.print("|  ");
+                    System.out.print("|   ");
                 }
             }
             System.out.println("| ");
