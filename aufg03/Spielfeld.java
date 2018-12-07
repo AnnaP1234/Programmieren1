@@ -71,13 +71,10 @@ class Spielfeld {
                     System.out.println("Feld ist bereits belegt.");
                 }
             } while (!isOk(x, y));
-            // SpielerAmZug
             spielfeld[x][y] = getSymbol();
             aktuellesSpielfeldAusgeben();
             spielzug++;
-            // Spielverlauf
         }
-        //spielzug--;
         System.out.println(spielstand(ueberpruefeSpielstand(y, x)));
     }
     
@@ -85,7 +82,7 @@ class Spielfeld {
     * Überprüft ob das gewünschte Feld schon belegt ist
     * @param x = Reihe vom Spieler eingegeben
     * @param y = Spalte vom Spieler eingegeben
-    * @return wahr wenn das Feld frei sit
+    * @return wahr wenn das Feld frei ist
     */
     private boolean isOk(int x, int y) {
         if (spielfeld[x][y] == 0) {

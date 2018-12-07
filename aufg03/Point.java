@@ -24,7 +24,7 @@ public class Point {
     }
     
     /*
-    * Kostruktur der Klasse pointer
+    * Kostruktur der Klasse Point
     * @param übergegebenen Werte für x und y
     * @return gesetzten Werte für x und y
     */
