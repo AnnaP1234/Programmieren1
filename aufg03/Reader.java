@@ -23,8 +23,16 @@ public class Reader {
     */
     public Point readKoord() {
         System.out.println("Bitte die Koordinaten (Reihe und Spalte, jeweils 0-2) eingeben: ");
-        int x = sc.nextInt();
-        int y = sc.nextInt();
+        int x = 3;
+        int y = 3;
+        try {
+            x = sc.nextInt();
+            y = sc.nextInt();
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Bitte Zahlenwerte eingeben.");
+            sc.nextLine();
+            return readKoord();
+        }
         
         if (!isOk(x, y)) {
             System.out.println("Die Werte sollten zwischen 0 und 2 liegen.");
