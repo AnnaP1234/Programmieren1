@@ -62,6 +62,7 @@ class Spielfeld {
             spielzug++;
         }
         while ( ueberpruefeSpielstand(y, x) == 0) {
+            System.out.println("Spieler " + spielerAmZug() + " ist am Zug.");
             do {
                 Point point = reader.readKoord();
                 x = point.getX();
@@ -76,7 +77,7 @@ class Spielfeld {
             spielzug++;
             // Spielverlauf
         }
-        spielzug--;
+        //spielzug--;
         System.out.println(spielstand(ueberpruefeSpielstand(y, x)));
     }
     
@@ -205,6 +206,7 @@ class Spielfeld {
     *  @return Aussage über den aktuellen Spielstan der ausgegeben werden kann
     */
     public String spielstand(int stand) {
+        spielzug--;
         switch (stand) {
             case 1:
                 return "Spieler " + spielerAmZug() + " hat gewonnen.";
