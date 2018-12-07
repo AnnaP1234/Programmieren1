@@ -143,11 +143,11 @@ class Spielfeld {
 
     /**
     *  Prüft, ob das Spielfeld in der übergebenen Zeile gewonnen wurde.
-    *  @param zeile = gewünschte Zeiel die überprüft werden soll
+    *  @param z = gewünschte Zeile die überprüft werden soll
     *  @return true wenn Zeile gewonnen ist
     */
-    public boolean pruefeZeile(int zeile) {
-        if ((spielfeld[zeile][0] == 'x' || spielfeld[zeile][0] == 'o') && spielfeld[zeile][0] == spielfeld[zeile][1] && spielfeld[zeile][0] == spielfeld[zeile][2]) {
+    public boolean pruefeZeile(int z) {
+        if ((spielfeld[z][0] == 'x' || spielfeld[z][0] == 'o') && spielfeld[z][0] == spielfeld[z][1] && spielfeld[z][0] == spielfeld[z][2]) {
             return true;
         }
         return false;
@@ -155,11 +155,11 @@ class Spielfeld {
 
     /**
     *  Prüft, ob das Spielfeld in der übergebenen Spalte gewonnen wurde.
-    *  @param spalte ist gewünschte Spalte die überprüft werden soll
+    *  @param s ist gewünschte Spalte die überprüft werden soll
     *  @return true wenn Spalte gewonnen ist
     */
-    public boolean pruefeSpalte(int spalte) {
-        if ((spielfeld[0][spalte] == 'x' || spielfeld[0][spalte] == 'o') && spielfeld[0][spalte] == spielfeld[1][spalte] && spielfeld[0][spalte] == spielfeld[2][spalte]) {
+    public boolean pruefeSpalte(int s) {
+        if ((spielfeld[0][s] == 'x' || spielfeld[0][s] == 'o') && spielfeld[0][s] == spielfeld[1][s] && spielfeld[0][s] == spielfeld[2][s]) {
             return true;
         }
         return false;
@@ -206,8 +206,8 @@ class Spielfeld {
     *  @return Aussage über den aktuellen Spielstan der ausgegeben werden kann
     */
     public String spielstand(int stand) {       
-	spielzug--;
-	switch (stand) {
+        spielzug--;
+        switch (stand) {
             case 1:
                 return "Spieler " + spielerAmZug() + " hat gewonnen.";
                 
