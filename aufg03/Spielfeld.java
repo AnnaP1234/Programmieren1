@@ -173,7 +173,7 @@ class Spielfeld {
         if ((spielfeld[0][0] == 'x' || spielfeld[0][0] == 'o') && spielfeld[0][0] == spielfeld[1][1] && spielfeld[0][0] == spielfeld[2][2]) {
             return true;
         }
-        if ((spielfeld[0][2] == 'x' || spielfeld[0][2] == 'o') && spielfeld[0][2] == spielfeld[1][1] && spielfeld[0][2] == spielfeld[2][2]) {
+        if ((spielfeld[0][2] == 'x' || spielfeld[0][2] == 'o') && spielfeld[0][2] == spielfeld[1][1] && spielfeld[0][2] == spielfeld[2][0]) {
             return true;
         }
         return false;
@@ -206,9 +206,9 @@ class Spielfeld {
     *  @return Aussage über den aktuellen Spielstan der ausgegeben werden kann
     */
     public String spielstand(int stand) {       
-        switch (stand) {
+	spielzug--;
+	switch (stand) {
             case 1:
-		spielzug--;
                 return "Spieler " + spielerAmZug() + " hat gewonnen.";
                 
             case 2:
