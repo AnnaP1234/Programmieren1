@@ -1,4 +1,4 @@
-public interface iFeld
+public interface IFeld
 {
     private char column;
     private int row;

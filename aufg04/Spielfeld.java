@@ -1,6 +1,5 @@
 /**
 * In der Klasse Spielfeld verwaltet das Spielfeld und den Spielverlauf.
-* Es wird überprüft, welcher Spieler am Zug ist 
 * @author Anna Panzer 4509268 Gruppe 2A
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
@@ -17,12 +16,10 @@ class Spielfeld {
 
     /**
     *  Eine Instanze der Spielfeldklasse wird erstellt
-    *  Da die Größe des Spielfelds festgelegt ist, wird diese konstant auf 3x3 gesetzt
-    *  Zu Beginn des Spiels ist die Zuganzahl 0.
     */
     public Spielfeld(int n, int x, int v) {
         Generiere(n,x,v);
-        reader = new Reader();
+        reader = new Reader(n);
     }
 
 // endregion ctor
@@ -38,22 +35,22 @@ class Spielfeld {
         int max = (n*n)-2;
         for (int i = 0; i < max; i++ ) {
             point.AddOne();
-            spielfeld[point.GetX()][point.GetY()] = new Feld();
+            spielfeld[point.GetX()][point.GetY()] = new Unvermint();
         }
 
-        GeneriereMineFelder();
-        GeneriereVisitedPoints();
+        GeneriereMineFelder(n);
+        GeneriereVisitedPoints(n);
         ZaehleBombeninNaehe();
     }
 
     private void ZaehleBombeninNaehe(int max) {
-        Point point = new Point (max)
+        Point point = new Point (max);
         for (i < max; i++) {
 
             Point[] points = point.GetPointsArround();
             int bombenanzahl = 0;
-            forEech(apoint in points){
-                apoint == isBombe bombenanzahl++;
+            for(Point apoint : points) {
+                //apoint == isBombe bombenanzahl++;
             }
             spielfeld[point.GetX()][point.GetY()].SetBomben(bombenanzahl);
 
@@ -61,26 +58,27 @@ class Spielfeld {
         }
     }
 
-    private void GeneriereMineFelder(int x) {
+    private void GeneriereMineFelder(int n, int x) {
+        Point point = new Point(n);
         for (i < x; i++) {
-            Point point = Point.Zufall();
+            point.Zufall();
             while(IsBombe(point)) {
-                point = Point.Zufall();
+                point.Zufall();
             }
             spielfeld[point.x][point.y] = new Mine();
         }
-
     }
 
-    private void GeneriereVisitedPoints(int v) {
+    private void GeneriereVisitedPoints(int n, int v) {
+        Point point = new Point(n);
         for (i < v; i++) {
-            Point point = Point.Zufall();
+            point.Zufall();
 
             while(IsBombe(point)) {
-                point = Point.Zufall();
+                point.Zufall();
             }
 
-            spielfeld[point.x][point.y] = new VisitPoint();
+            spielfeld[point.x][point.y] = new Aufgedeckt();
 
         }
     }
@@ -125,18 +123,6 @@ class Spielfeld {
         System.out.println(spielstand(ueberpruefeSpielstand(y, x)));
     }
     
-    /**
-    * Überprüft ob das gewünschte Feld schon belegt ist
-    * @param x = Reihe vom Spieler eingegeben
-    * @param y = Spalte vom Spieler eingegeben
-    * @return wahr wenn das Feld frei ist
-    */
-    private boolean isOk(int x, int y) {
-        if (spielfeld[x][y] == 0) {
-            return true;
-        }
-        return false;
-    }
 
     /**
     *  Überprüft, ob die Eingabe das Spiel durch Sieg oder Unentschieden beendet.
@@ -145,13 +131,13 @@ class Spielfeld {
     *  @return 0=Spiel geht weiter, 1=Spiel gewonnen, 2=Unentschieden
     */
     public boolean ueberpruefeSpielstand(int x, int y) {
-
+        // nach ausführen von aktion return??
         // ist Feld eine Mine?
         return true;
     }
 
     /**
-    *  Gibt den aktuellen Stand des Spielfelds als String wieder.
+    *  Gibt den aktuellen Stand des Spielfelds wieder.
     */
     public void aktuellesSpielfeldAusgeben() {
         String tabelle = "-------------";

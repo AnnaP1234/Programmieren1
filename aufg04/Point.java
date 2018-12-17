@@ -24,6 +24,11 @@ public class Point {
         }
     }
 
+    //Wichtig
+    public void Zufall() {
+        // x, y in Max zufällig bestimmen
+    }
+
     /*
     * Gibt Koordinate y wieder
     * @return Koordinate y

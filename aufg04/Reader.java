@@ -8,12 +8,14 @@ import java.util.Scanner;
 public class Reader {
 
     private Scanner sc;
+    private int size;
 
     /** 
     * Konstruktur der Klasse Reader
     */
-    public Reader() {
+    public Reader(int pSize) {
         sc = new Scanner(System.in);
+        size = pSize;
     }
     
     /** 

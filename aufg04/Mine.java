@@ -1,4 +1,4 @@
-public class Mine implements iFeld
+public class Mine implements IFeld
 {
     private char column;
     private int row;
