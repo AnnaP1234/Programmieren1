@@ -1,8 +1,23 @@
 public class Mine implements IFeld
 {
+    // region vars
+
     private char column;
     private int row;
     private char symbol;
+    private boolean betreten;
+
+    // endregion vars
+
+    // region methods
+
+    public char getSymbol() {
+        return symbol;
+    }
+
+    public boolean getBetreten() {
+        return betreten;
+    }
 
     public boolean entschaerfen()
     {
@@ -15,4 +30,6 @@ public class Mine implements IFeld
         
         return false;
     }
+
+    // endregion methods
 }

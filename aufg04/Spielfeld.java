@@ -4,10 +4,11 @@
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
 class Spielfeld {
-    
+    // Fehlend: Ausgabe (offenes Spielfeld und aktuelles Spielfeld), Spielverlaufmethode
+    // Überlegung: Aufforderung nach Aktion des Spielers in Reader oder Spielfeld??
 // region vars
 
-    private iFeld[][] spielfeld;
+    private IFeld[][] spielfeld;
     private Reader reader;
 
 // endregion vars
@@ -15,10 +16,10 @@ class Spielfeld {
 // region ctor
 
     /**
-    *  Eine Instanze der Spielfeldklasse wird erstellt
+    *  Eine Instanz der Spielfeldklasse wird erstellt
     */
     public Spielfeld(int n, int x, int v) {
-        Generiere(n,x,v);
+        generiere(n, x, v);
         reader = new Reader(n);
     }
 
@@ -27,60 +28,62 @@ class Spielfeld {
 // region methods
 
 
-    private void Generiere(int n, int x, int v) {
+    private void generiere(int n, int x, int v) {
 
-        spielfeld = new iFeld[n][n];
+        spielfeld = new IFeld[n][n];
 
         Point point = new Point(n-1);
         int max = (n*n)-2;
         for (int i = 0; i < max; i++ ) {
-            point.AddOne();
-            spielfeld[point.GetX()][point.GetY()] = new Unvermint();
+            point.addOne();
+            spielfeld[point.getX()][point.getY()] = new Unvermint();
         }
 
-        GeneriereMineFelder(n);
-        GeneriereVisitedPoints(n);
-        ZaehleBombeninNaehe();
+        generiereMineFelder(n, x);
+        generiereVisitedPoints(n, v);
+        zaehleBombeninNaehe(n);
     }
 
-    private void ZaehleBombeninNaehe(int max) {
+    private void zaehleBombeninNaehe(int max) {
         Point point = new Point (max);
-        for (i < max; i++) {
-
-            Point[] points = point.GetPointsArround();
+        for (int i = 0; i < max; i++) {
+            Point[] points = point.getPointsArround();
             int bombenanzahl = 0;
             for(Point apoint : points) {
-                //apoint == isBombe bombenanzahl++;
+                if (isMine(apoint)) {
+                    bombenanzahl ++;
+                }
             }
-            spielfeld[point.GetX()][point.GetY()].SetBomben(bombenanzahl);
-
-            point.AddOne();
+            ((Unvermint) spielfeld[point.getX()][point.getY()]).setMinenInNaehe(bombenanzahl);
+            point.addOne();
         }
     }
 
-    private void GeneriereMineFelder(int n, int x) {
+    private void generiereMineFelder(int n, int x) {
         Point point = new Point(n);
-        for (i < x; i++) {
-            point.Zufall();
-            while(IsBombe(point)) {
-                point.Zufall();
-            }
-            spielfeld[point.x][point.y] = new Mine();
+        for (int i = 0; i < x; i++) {
+            do {
+                point.zufallKoord();
+            } while(isMine(point));
+            spielfeld[point.getX()][point.getY()] = new Mine();
         }
     }
 
-    private void GeneriereVisitedPoints(int n, int v) {
+    private void generiereVisitedPoints(int n, int v) {
         Point point = new Point(n);
-        for (i < v; i++) {
-            point.Zufall();
-
-            while(IsBombe(point)) {
-                point.Zufall();
-            }
-
-            spielfeld[point.x][point.y] = new Aufgedeckt();
-
+        for (int i = 0; i < v; i++) {
+            do {
+                point.zufallKoord();
+            } while(isMine(point));
+            spielfeld[point.getX()][point.getY()].aufdecken();
         }
+    }
+
+    public boolean isMine(Point point) {
+        if (spielfeld[point.getX()][point.getY()].getSymbol() == 'X') {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -93,7 +96,7 @@ class Spielfeld {
     *  untersucht werden, ob das Spiel beendet ist.
     *  In den nachfolgenden Zügen ist dies hingegen möglich. Das Spiel läuft nur solange bis
     *  es einen Sieger oder ein Unentschieden gibt.
-    */
+    
     public void spielen() {
         aktuellesSpielfeldAusgeben();
         char x = 0;
@@ -122,14 +125,13 @@ class Spielfeld {
         }
         System.out.println(spielstand(ueberpruefeSpielstand(y, x)));
     }
-    
 
     /**
     *  Überprüft, ob die Eingabe das Spiel durch Sieg oder Unentschieden beendet.
     *  @param x = Reihe
     *  @param y = Spalte vom Spieler eingeben
     *  @return 0=Spiel geht weiter, 1=Spiel gewonnen, 2=Unentschieden
-    */
+    
     public boolean ueberpruefeSpielstand(int x, int y) {
         // nach ausführen von aktion return??
         // ist Feld eine Mine?
@@ -138,7 +140,7 @@ class Spielfeld {
 
     /**
     *  Gibt den aktuellen Stand des Spielfelds wieder.
-    */
+    
     public void aktuellesSpielfeldAusgeben() {
         String tabelle = "-------------";
         System.out.println(tabelle);
@@ -154,7 +156,7 @@ class Spielfeld {
             System.out.println("| ");
             System.out.println(tabelle);
         }
-    }
+    }*/
 
 // endregion methods
 }

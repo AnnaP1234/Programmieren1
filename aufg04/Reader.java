@@ -6,9 +6,16 @@ import java.util.Scanner;
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
 public class Reader {
+    // Fehlend: Überprüfung ob Wertebereich OK (-> Size)
+
+    // region vars
 
     private Scanner sc;
     private int size;
+
+    // endregion vars
+
+    // region ctor
 
     /** 
     * Konstruktur der Klasse Reader
@@ -17,6 +24,10 @@ public class Reader {
         sc = new Scanner(System.in);
         size = pSize;
     }
+
+    // endregion ctor
+
+    // region methods
     
     /** 
     * Die Methode readKoord enthält die Aufforderung die zwei Koordinaten 
@@ -25,23 +36,31 @@ public class Reader {
     */
     public Point readKoord() {
         System.out.println("Bitte die Koordinaten (Reihe und Spalte, jeweils 0-2) eingeben: ");
-        char column = "";
+        int column = 0;
         int row = 3;
         try {
-            column = sc.next().charAt(0);
+            column = parseChar(sc.next().charAt(0));
             row = sc.nextInt();
         } catch (java.util.InputMismatchException e) {
             System.out.println("Bitte Zahlenwerte eingeben.");
             sc.nextLine();
             return readKoord();
         }
-        
+        /*
         if (!isOk(column, row)) {
             System.out.println("Die Werte sollten zwischen 0 und 2 liegen.");
             return readKoord();
-        }
+        }*/
 
         return new Point(column, row);
+    }
+    /**
+     * Ermittelt anhand eines übergebenen Charlitterals die zugehörige Koordinate des Spielfelds
+     * @param column das Charliteral, das in einen für das Spielfeld geeigneten Wert umgewandelt werden soll
+     * @return ein Integerwert, der dem Spielfeld rangfe entspricht
+     */
+    private int parseChar(char column) {
+        return ((int) column) - 65;
     }
     
     /**
@@ -55,4 +74,6 @@ public class Reader {
         }
         return false;
     }*/
+
+    // endregion methods
 }
