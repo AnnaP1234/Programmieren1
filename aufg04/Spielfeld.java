@@ -8,7 +8,7 @@ class Spielfeld {
     
 // region vars
 
-    private Quadrat[][] spielfeld;
+    private iFeld[][] spielfeld;
     private Reader reader;
 
 // endregion vars
@@ -20,15 +20,70 @@ class Spielfeld {
     *  Da die Größe des Spielfelds festgelegt ist, wird diese konstant auf 3x3 gesetzt
     *  Zu Beginn des Spiels ist die Zuganzahl 0.
     */
-    public Spielfeld() {
-        Quadrat[][] pSpielfeld = new Quadrat[10][10];
-        spielfeld = pSpielfeld;
+    public Spielfeld(int n, int x, int v) {
+        Generiere(n,x,v);
         reader = new Reader();
     }
 
 // endregion ctor
 
 // region methods
+
+
+    private void Generiere(int n, int x, int v) {
+
+        spielfeld = new iFeld[n][n];
+
+        Point point = new Point(n-1);
+        int max = (n*n)-2;
+        for (int i = 0; i < max; i++ ) {
+            point.AddOne();
+            spielfeld[point.GetX()][point.GetY()] = new Feld();
+        }
+
+        GeneriereMineFelder();
+        GeneriereVisitedPoints();
+        ZaehleBombeninNaehe();
+    }
+
+    private void ZaehleBombeninNaehe(int max) {
+        Point point = new Point (max)
+        for (i < max; i++) {
+
+            Point[] points = point.GetPointsArround();
+            int bombenanzahl = 0;
+            forEech(apoint in points){
+                apoint == isBombe bombenanzahl++;
+            }
+            spielfeld[point.GetX()][point.GetY()].SetBomben(bombenanzahl);
+
+            point.AddOne();
+        }
+    }
+
+    private void GeneriereMineFelder(int x) {
+        for (i < x; i++) {
+            Point point = Point.Zufall();
+            while(IsBombe(point)) {
+                point = Point.Zufall();
+            }
+            spielfeld[point.x][point.y] = new Mine();
+        }
+
+    }
+
+    private void GeneriereVisitedPoints(int v) {
+        for (i < v; i++) {
+            Point point = Point.Zufall();
+
+            while(IsBombe(point)) {
+                point = Point.Zufall();
+            }
+
+            spielfeld[point.x][point.y] = new VisitPoint();
+
+        }
+    }
 
     /**
     *  Die Methode spielen() organisiert den Spielablauf

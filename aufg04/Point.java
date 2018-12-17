@@ -4,8 +4,9 @@
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
 public class Point {
-    private char x;
+    private int x;
     private int y;
+    private int max;
     
     /*
     * Gibt Koordinate x wieder
@@ -15,6 +16,14 @@ public class Point {
         return x;
     }
     
+    public void AddOne() {
+        x++;
+        if (x >= max) {
+            x = 0;
+            y++;  
+        }
+    }
+
     /*
     * Gibt Koordinate y wieder
     * @return Koordinate y
@@ -22,14 +31,24 @@ public class Point {
     public int getY(){
         return y;
     }
+
+    public Point[] GetPointsArround() {
+
+    }
     
     /*
     * Kostruktur der Klasse Point
     * @param übergegebenen Werte für x und y
     * @return gesetzten Werte für x und y
     */
-    public Point(char pX, int pY) {
+    public Point(int pX, int pY) {
         x = pX;
         y = pY;
+    }
+
+    public Point (int pmax) {
+        x = 0;
+        y = 0;
+        max = pmax;
     }
 }

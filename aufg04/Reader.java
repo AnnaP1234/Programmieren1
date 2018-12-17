@@ -23,23 +23,23 @@ public class Reader {
     */
     public Point readKoord() {
         System.out.println("Bitte die Koordinaten (Reihe und Spalte, jeweils 0-2) eingeben: ");
-        char x = "";
-        int y = 3;
+        char column = "";
+        int row = 3;
         try {
-            x = sc.nextChar();
-            y = sc.nextInt();
+            column = sc.next().charAt(0);
+            row = sc.nextInt();
         } catch (java.util.InputMismatchException e) {
             System.out.println("Bitte Zahlenwerte eingeben.");
             sc.nextLine();
             return readKoord();
         }
         
-        if (!isOk(x, y)) {
+        if (!isOk(column, row)) {
             System.out.println("Die Werte sollten zwischen 0 und 2 liegen.");
             return readKoord();
         }
 
-        return new Point(x, y);
+        return new Point(column, row);
     }
     
     /**
