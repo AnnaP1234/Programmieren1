@@ -2,12 +2,19 @@ public class Mine implements IFeld
 {
     // region vars
 
-    private char column;
-    private int row;
     private char symbol;
     private boolean betreten;
 
     // endregion vars
+
+    // region ctor
+
+    public Mine() {
+        symbol = 'X';
+        betreten = false;
+    }
+
+    // endregion ctor
 
     // region methods
 
@@ -21,13 +28,13 @@ public class Mine implements IFeld
 
     public boolean entschaerfen()
     {
-        symbol = "!";
+        symbol = '!';
         return true;
     }
 
-    public boolean umdrehen()
+    public boolean aufdecken()
     {
-        
+        betreten = true;
         return false;
     }
 

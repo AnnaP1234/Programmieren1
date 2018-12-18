@@ -6,7 +6,6 @@ import java.util.Scanner;
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
 public class Reader {
-    // Fehlend: Überprüfung ob Wertebereich OK (-> Size)
 
     // region vars
 
@@ -42,15 +41,14 @@ public class Reader {
             column = parseChar(sc.next().charAt(0));
             row = sc.nextInt();
         } catch (java.util.InputMismatchException e) {
-            System.out.println("Bitte Zahlenwerte eingeben.");
+            System.out.println("Bitte korrekte Koordinaten eingeben.");
             sc.nextLine();
             return readKoord();
         }
-        /*
         if (!isOk(column, row)) {
-            System.out.println("Die Werte sollten zwischen 0 und 2 liegen.");
+            System.out.println("Die Werte sollten im Feld liegen.");
             return readKoord();
-        }*/
+        }
 
         return new Point(column, row);
     }
@@ -64,16 +62,17 @@ public class Reader {
     }
     
     /**
-    * Überprüft ob die eingegeben Werte zwischen 0-2 liegen
-    * @param eingegebenen Koordinaten x und y
-    * @return true wenn Werte zwischen 0-2 liegen
+     * Überprüft ob die eingegeben Werte zwischen 0-2 liegen
+     * @param x Wert der zu überprüfenden Spalte
+     * @param y Wert der zu überprüfenden Zeile
+     * @return true wenn Werte im Feld liegen, also kleiner als die Größe sind
     */
-    /*private boolean isOk(int x, int y) {
-        if (x < 3 && y < 3) {
+    private boolean isOk(int x, int y) {
+        if (x < size && y < size) {
             return true;
         }
         return false;
-    }*/
+    }
 
     // endregion methods
 }

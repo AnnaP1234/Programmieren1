@@ -2,13 +2,18 @@ public class Unvermint implements IFeld {
 
     //region vars
 
-    private static int column;
-    private static int row;
     private int minenInNaehe;
     private char symbol;
     private boolean betreten;
 
     // endregion vars
+
+    // region ctor
+
+    public Unvermint() {
+        betreten = false;
+    }
+    // endregion ctor
 
     // region methods
 
@@ -18,6 +23,11 @@ public class Unvermint implements IFeld {
 
     public boolean getBetreten() {
         return betreten;
+    }
+
+    public char getSymbol() {
+        symbol = (char) (48 + minenInNaehe);
+        return symbol;
     }
 
     public boolean entschaerfen() {
