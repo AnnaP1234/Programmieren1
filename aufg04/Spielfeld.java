@@ -32,22 +32,27 @@ class Spielfeld {
 
         spielfeld = new IFeld[n][n];
 
-        Point point = new Point(n-1);
-        int max = (n*n)-2;
-        for (int i = 0; i < max; i++ ) {
-            point.addOne();
-            spielfeld[point.getX()][point.getY()] = new Unvermint();
+        Point point = new Point(n - 1);
+        int max = (n * n) - 2;
+        for (int i = 0; i < 10; i++ ) {
+            for (int y = 0; y < 10; y++) {
+
+                spielfeld[i][y] = new Unvermint();
+                System.out.println(spielfeld[i][y].getSymbol());
+                point.addOne();
+            }
         }
 
         generiereMineFelder(n, x);
         generiereVisitedPoints(n, v);
-        zaehleBombeninNaehe(n);
+        zaehleMineninNaehe(n);
     }
 
-    private void zaehleBombeninNaehe(int max) {
+    private void zaehleMineninNaehe(int max) {
         Point point = new Point (max);
         for (int i = 0; i < max; i++) {
             Point[] points = point.getPointsArround();
+            System.out.println(points[0].getX());
             int bombenanzahl = 0;
             for(Point apoint : points) {
                 if (isMine(apoint)) {
@@ -67,6 +72,7 @@ class Spielfeld {
             } while(isMine(point));
             spielfeld[point.getX()][point.getY()] = new Mine();
         }
+        ausgabe(true);
     }
 
     private void generiereVisitedPoints(int n, int v) {
@@ -79,11 +85,39 @@ class Spielfeld {
         }
     }
 
-    public boolean isMine(Point point) {
+    private boolean isMine(Point point) {
         if (spielfeld[point.getX()][point.getY()].getSymbol() == 'X') {
             return true;
         }
         return false;
+    }
+
+    public void ausgabe(boolean testen) {
+        int count = 1;
+        System.out.print(" ");
+        for (int i = 0; i < spielfeld.length; i++) {
+            System.out.print(" | " + (char) (65 + i));
+            count += 4;
+        }
+        System.out.print(" |\r\n");
+        count += 2;
+        // Evtl Divisor für Tabellenkopf
+        for (int i = 0; i < count; i++) {
+            System.out.print("-");
+        }
+        System.out.println("");
+
+        for (int x = 0; x < spielfeld.length; x++) {
+            System.out.print(x + "|");
+            for (int y = 0; y < spielfeld.length; y++) {
+                if (testen || ((IFeld) spielfeld[x][y]).getBetreten()) {
+                    System.out.print("| " + ((IFeld) spielfeld[x][y]).getSymbol() + " ");
+                } else {
+                    System.out.print("|   ");
+                }
+            }
+            System.out.print("|\r\n");
+        }
     }
 
     /**

@@ -60,7 +60,7 @@ public class Point {
 
     public void addOne() {
         x++;
-        if (x >= max) {
+        if (x >= max && y < max) {
             x = 0;
             y++;  
         }
@@ -82,14 +82,14 @@ public class Point {
     public Point[] getPointsArround() {
         Point[] points = new Point[8];
 		int location = 0;
-        for (int i = -1; i < 2; i++) {
-            if ((x + i) >= 0 && (x + i) < max) {
-                for (int j = -1; j < 2; j++) {
-                    if (i == 0 && j == 0) {
+        for (int i = 0; i < 3; i++) {
+            if (x != 0 && (x + i - 1) < max) {
+                for (int j = 0; j < 3; j++) {
+                    if (i == 1 && j == 1) {
                         continue;
                     }
-                    if ((y + i) >= 0 && (x + i) < max) {
-                        Point point = new Point((x + i), (y + j));
+                    if (y != 0 && (y + i - 1) < max) {
+                        Point point = new Point((x + i - 1), (y + j - 1));
 						points[location] = point;
                         location ++;
                     }
@@ -97,7 +97,6 @@ public class Point {
             }
         }
 		return points;
-    }
-
+    } 
     // endregion methods
 }

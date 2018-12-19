@@ -26,8 +26,7 @@ public class Unvermint implements IFeld {
     }
 
     public char getSymbol() {
-        symbol = (char) (48 + minenInNaehe);
-        return symbol;
+        return (char) (48 + minenInNaehe);
     }
 
     public boolean entschaerfen() {
