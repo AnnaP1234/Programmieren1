@@ -77,23 +77,19 @@ public class Point {
 
     /**
      * Ermittelt die direkten Nachbarpunkte um den aktuellen Punkt
-     * @return Array mit den Nachberpunkten, 8 falls der Punkt nicht am Rand des Spielfelds liegt
+     * @return Array mit den Nachbarpunkten
      */
     public Point[] getPointsArround() {
         Point[] points = new Point[8];
 		int location = 0;
-        for (int i = 0; i < 3; i++) {
-            if (x != 0 && (x + i - 1) < max) {
-                for (int j = 0; j < 3; j++) {
-                    if (i == 1 && j == 1) {
-                        continue;
-                    }
-                    if (y != 0 && (y + i - 1) < max) {
-                        Point point = new Point((x + i - 1), (y + j - 1));
-						points[location] = point;
-                        location ++;
-                    }
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                if (i == 0 && j == 0) {
+                    continue;
                 }
+                Point point = new Point((x + i), (y + j));
+                points[location] = point;
+                location ++;
             }
         }
 		return points;

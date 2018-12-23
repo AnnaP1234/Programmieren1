@@ -50,16 +50,22 @@ class Spielfeld {
 
     private void zaehleMineninNaehe(int max) {
         Point point = new Point (max);
-        for (int i = 0; i < max; i++) {
-            Point[] points = point.getPointsArround();
-            System.out.println(points[0].getX());
-            int bombenanzahl = 0;
-            for(Point apoint : points) {
-                if (isMine(apoint)) {
-                    bombenanzahl ++;
+        int anzahl = (max * max);
+        for (int i = 0; i < anzahl; i++) {
+            if (! (spielfeld[point.getX()][point.getY()] instanceof Mine)) {
+                Point[] points = point.getPointsArround();
+                int bombenanzahl = 0;
+                for(Point apoint : points) {
+                    if (apoint.getX() >= 0 && apoint.getY() >= 0) {
+                        if (apoint.getX() < spielfeld.length && apoint.getY() < spielfeld.length) {
+                            if (isMine(apoint)) {
+                                bombenanzahl ++;
+                            }
+                        }
+                    }
                 }
+                ((Unvermint) spielfeld[point.getX()][point.getY()]).setMinenInNaehe(bombenanzahl);
             }
-            ((Unvermint) spielfeld[point.getX()][point.getY()]).setMinenInNaehe(bombenanzahl);
             point.addOne();
         }
     }
@@ -118,6 +124,7 @@ class Spielfeld {
             }
             System.out.print("|\r\n");
         }
+        System.out.println();
     }
 
     /**
