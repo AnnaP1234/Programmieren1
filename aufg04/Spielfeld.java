@@ -168,9 +168,9 @@ class Spielfeld {
             int aktion = reader.readAktion();
             if (aktion == 1) {
                 ((IFeld) spielfeld[point.getX()][point.getY()]).aufdecken();
-                System.out.println("Feld wird aufgedeckt.");
+                System.out.println("Das Feld wird aufgedeckt.");
                 if (isMine(point)) {
-                    System.out.println("Feld ist eine Mine! Spiel beendet.");
+                    System.out.println("Das Feld ist eine Mine! Spiel beendet.");
                     ausgabe(false);
                     break;
                 }
@@ -180,7 +180,7 @@ class Spielfeld {
                 if (isMine(point)) {
                     ((IFeld) spielfeld[point.getX()][point.getY()]).entschaerfen();
                     ((IFeld) spielfeld[point.getX()][point.getY()]).aufdecken();
-                    System.out.println("Feld ist eine Mine und wurde entschärft.");
+                    System.out.println("Das Feld ist eine Mine und wurde entschärft.");
                 }
                 
             }
@@ -208,7 +208,6 @@ class Spielfeld {
                 }
             }
         }
-        
         if (counter == max) {
             return true;
         }
