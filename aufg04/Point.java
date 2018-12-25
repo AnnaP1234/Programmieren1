@@ -17,8 +17,8 @@ public class Point {
     
     /**
     * Kostruktor der Klasse Point
-    * @param übergegebenen Werte für x und y
-    * @return gesetzten Werte für x und y
+    * @param x = übergebener Wert für x
+    * @param y = übergebener Wert für y
     */
     public Point(int pX, int pY) {
         x = pX;
@@ -57,7 +57,9 @@ public class Point {
         return y;
     }
 
-
+    /**
+    * Geht eine Koordinate weiter
+    */
     public void addOne() {
         x++;
         if (x >= max && y < max) {

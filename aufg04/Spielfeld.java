@@ -1,11 +1,9 @@
 /**
-* In der Klasse Spielfeld verwaltet das Spielfeld und den Spielverlauf.
+* Die Klasse Spielfeld verwaltet das Spielfeld und den Spielverlauf.
 * @author Anna Panzer 4509268 Gruppe 2A
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
 class Spielfeld {
-    // Fehlend: Ausgabe (offenes Spielfeld und aktuelles Spielfeld), Spielverlaufmethode
-    // Überlegung: Aufforderung nach Aktion des Spielers in Reader oder Spielfeld??
 // region vars
 
     private IFeld[][] spielfeld;
@@ -16,7 +14,10 @@ class Spielfeld {
 // region ctor
 
     /**
-    *  Eine Instanz der Spielfeldklasse wird erstellt
+    * Eine Instanz der Spielfeldklasse wird erstellt
+    * @param n = Größe des Spielfelds
+    * @param v = Anzahl der aufgedeckten Felder
+    * @param x = Anzahl der Minen
     */
     public Spielfeld(int n, int x, int v) {
         generiere(n, x, v);
@@ -27,7 +28,12 @@ class Spielfeld {
 
 // region methods
 
-
+    /**
+    * Generiert ein Spielfeld der Größe 'n' und verteilt zufällig die gewünschte Anzahl von Minen 
+    * @param n = Größe des Spielfelds
+    * @param v = Anzahl der aufgedeckten Felder
+    * @param x = Anzahl der Minen
+    */
     private void generiere(int n, int x, int v) {
 
         spielfeld = new IFeld[n][n];
@@ -38,7 +44,7 @@ class Spielfeld {
             for (int y = 0; y < 10; y++) {
 
                 spielfeld[i][y] = new Unvermint();
-                System.out.println(spielfeld[i][y].getSymbol());
+                //System.out.println(spielfeld[i][y].getSymbol());
                 point.addOne();
             }
         }
@@ -48,6 +54,10 @@ class Spielfeld {
         zaehleMineninNaehe(n);
     }
 
+    /**
+    * Methode die die Minen in der Nähe des Felds ausgibt
+    * @param max = maximale Größe des Spielfelds
+    */
     private void zaehleMineninNaehe(int max) {
         Point point = new Point (max);
         int anzahl = (max * max);
@@ -70,6 +80,11 @@ class Spielfeld {
         }
     }
 
+    /**
+    * Methode die die Minen zufällig auf Spielfeld verteilt
+    * @param n = Größe des Spielfelds
+    * @param x = Anzahl der Minen
+    */
     private void generiereMineFelder(int n, int x) {
         Point point = new Point(n);
         for (int i = 0; i < x; i++) {
@@ -78,9 +93,14 @@ class Spielfeld {
             } while(isMine(point));
             spielfeld[point.getX()][point.getY()] = new Mine();
         }
-        ausgabe(true);
+        //ausgabe(true);
     }
-
+    
+    /**
+    * Methode die die initial aufgedeckten Felder zufällig auf Spielfeld verteilt
+    * @param n = Größe des Spielfelds
+    * @param v = Anzahl der aufgedeckten Felder
+    */
     private void generiereVisitedPoints(int n, int v) {
         Point point = new Point(n);
         for (int i = 0; i < v; i++) {
@@ -90,7 +110,12 @@ class Spielfeld {
             spielfeld[point.getX()][point.getY()].aufdecken();
         }
     }
-
+    
+    /**
+    * Methode überprüft ob aktuelle Feld eine Mine ist
+    * @param point = zu überprüfende Feld
+    * @return true = Feld ist eine Mine
+    */
     private boolean isMine(Point point) {
         if (spielfeld[point.getX()][point.getY()].getSymbol() == 'X') {
             return true;
@@ -98,6 +123,10 @@ class Spielfeld {
         return false;
     }
 
+    /**
+    * Methode die die Ausgabe des Spielfelds organisiert
+    * @param testen = true wenn komplett aufgedeckte Feld ausgegeben wird
+    */
     public void ausgabe(boolean testen) {
         int count = 1;
         System.out.print(" ");
@@ -107,7 +136,6 @@ class Spielfeld {
         }
         System.out.print(" |\r\n");
         count += 2;
-        // Evtl Divisor für Tabellenkopf
         for (int i = 0; i < count; i++) {
             System.out.print("-");
         }
@@ -130,74 +158,61 @@ class Spielfeld {
     /**
     *  Die Methode spielen() organisiert den Spielablauf
     *  Ruft die entsprechenden Methoden auf und führt durch das Spiel
-    *  Zu Beginn wird das leere Spielfeld ausgegeben
-    *  Danach wird der erste Spieler zu einer Eingabe aufgefordert. 
-    *  Anschließend wird das Spielfeld ausgegeben.
-    *  Da das Spiel noch nicht in den ersten Zügen abgeschlossen werden kann, muss nicht
-    *  untersucht werden, ob das Spiel beendet ist.
-    *  In den nachfolgenden Zügen ist dies hingegen möglich. Das Spiel läuft nur solange bis
-    *  es einen Sieger oder ein Unentschieden gibt.
-    
+    *  Zu Beginn wird das leere Spielfeld ausgegeben, um dann eine Eingabe vom Spieler zu fordern
+    */
     public void spielen() {
-        aktuellesSpielfeldAusgeben();
-        char x = 0;
-        int y = 0;
-        for (int i = 0; i < 4; i++) {
-            do {
-                Point point = reader.readKoord();
-                x = point.getX();
-                y = point.getY();
-                if (!isOk(x, y)) {
-                    System.out.println("Feld ist bereits belegt.");
-                }
-            } while (!isOk(x, y));
-            aktuellesSpielfeldAusgeben();
-        }
-        while ( ueberpruefeSpielstand(y, x) == 0) {
-            do {
-                Point point = reader.readKoord();
-                x = point.getX();
-                y = point.getY();
-                if (!isOk(x, y)) {
-                    System.out.println("Feld ist bereits belegt.");
-                }
-            } while (!isOk(x, y));
-            aktuellesSpielfeldAusgeben();
-        }
-        System.out.println(spielstand(ueberpruefeSpielstand(y, x)));
-    }
-
-    /**
-    *  Überprüft, ob die Eingabe das Spiel durch Sieg oder Unentschieden beendet.
-    *  @param x = Reihe
-    *  @param y = Spalte vom Spieler eingeben
-    *  @return 0=Spiel geht weiter, 1=Spiel gewonnen, 2=Unentschieden
-    
-    public boolean ueberpruefeSpielstand(int x, int y) {
-        // nach ausführen von aktion return??
-        // ist Feld eine Mine?
-        return true;
-    }
-
-    /**
-    *  Gibt den aktuellen Stand des Spielfelds wieder.
-    
-    public void aktuellesSpielfeldAusgeben() {
-        String tabelle = "-------------";
-        System.out.println(tabelle);
-
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
-                if (spielfeld[x][y] != 0) {
-                    System.out.print("| " + spielfeld[x][y] + " ");
-                } else {
-                    System.out.print("|   ");
+        ausgabe(false);
+        int spielzug = 1;
+        do {
+            Point point = reader.readKoord();
+            int aktion = reader.readAktion();
+            if (aktion == 1) {
+                ((IFeld) spielfeld[point.getX()][point.getY()]).aufdecken();
+                System.out.println("Feld wird aufgedeckt.");
+                if (isMine(point)) {
+                    System.out.println("Feld ist eine Mine! Spiel beendet.");
+                    ausgabe(false);
+                    break;
                 }
             }
-            System.out.println("| ");
-            System.out.println(tabelle);
+            if (aktion == 2) {
+                System.out.println("Es wird versucht das Feld zu entschärfen.");
+                if (isMine(point)) {
+                    ((IFeld) spielfeld[point.getX()][point.getY()]).entschaerfen();
+                    ((IFeld) spielfeld[point.getX()][point.getY()]).aufdecken();
+                    System.out.println("Feld ist eine Mine und wurde entschärft.");
+                }
+                
+            }
+            ausgabe(false);
+            spielzug++;
+        } while (!gewonnen());
+        
+        if (gewonnen()) {
+            System.out.println("Alle Felder aufgedeckt. Spiel gewonnen!");
         }
-    }*/
+    }
 
+    /**
+    *  Die Methode überprüft ob alle Felder des Spielfelds bereits betreten wurden
+    *  Falls ja wird das Spiel als gewonnen bezeichnet
+    */
+    public boolean gewonnen() {
+        int laenge = spielfeld.length;
+        int max = laenge * laenge;
+        int counter = 0;
+        for (int x = 0; x < laenge; x++) {
+            for (int y = 0; y < laenge; y++) {
+                if (((IFeld) spielfeld[x][y]).getBetreten()) {
+                    counter++;
+                }
+            }
+        }
+        
+        if (counter == max) {
+            return true;
+        }
+        return false;
+    }
 // endregion methods
 }
