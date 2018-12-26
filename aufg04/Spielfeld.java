@@ -93,7 +93,6 @@ class Spielfeld {
             } while(isMine(point));
             spielfeld[point.getX()][point.getY()] = new Mine();
         }
-        //ausgabe(true);
     }
     
     /**
@@ -160,7 +159,7 @@ class Spielfeld {
     *  Ruft die entsprechenden Methoden auf und führt durch das Spiel
     *  Zu Beginn wird das leere Spielfeld ausgegeben, um dann eine Eingabe vom Spieler zu fordern
     */
-    public void spielen() {
+    public boolean spielen() {
         ausgabe(false);
         int spielzug = 1;
         do {
@@ -172,7 +171,7 @@ class Spielfeld {
                 if (isMine(point)) {
                     System.out.println("Das Feld ist eine Mine! Spiel beendet.");
                     ausgabe(false);
-                    break;
+                    return false;
                 }
             }
             if (aktion == 2) {
@@ -188,9 +187,8 @@ class Spielfeld {
             spielzug++;
         } while (!gewonnen());
         
-        if (gewonnen()) {
-            System.out.println("Alle Felder aufgedeckt. Spiel gewonnen!");
-        }
+        System.out.println("Alle Felder aufgedeckt. Spiel gewonnen!");
+        return true;
     }
 
     /**
