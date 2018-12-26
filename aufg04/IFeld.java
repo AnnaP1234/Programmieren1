@@ -1,6 +1,9 @@
 /**
 * Klasse IFeld enthält das Interface für die Klassen Mine und Unvermint
-* Entscheidung für Interface, weil ....
+* Entscheidung für Interface, da diese Form der Abstraktion einen Bauplan für die Klassen gibt,
+* die vorgegebenen Methoden sind also bei einer Vererbung zu implementieren.
+* Dadurch ist garantiert, dass diese abrufbar/vorhanden sind, können aber unterschiedlich implementiert sein.
+* Dies wird dann in den vererbten Klassen individuell umgesetzt.
 * @author Anna Panzer 4509268 Gruppe 2A
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
