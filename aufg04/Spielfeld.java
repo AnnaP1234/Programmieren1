@@ -59,17 +59,17 @@ class Spielfeld {
     * @param max = maximale Größe des Spielfelds
     */
     private void zaehleMineninNaehe(int max) {
-        Point point = new Point (max);
+        Point point = new Point(max);
         int anzahl = (max * max);
         for (int i = 0; i < anzahl; i++) {
-            if (! (spielfeld[point.getX()][point.getY()] instanceof Mine)) {
+            if (!(spielfeld[point.getX()][point.getY()] instanceof Mine)) {
                 Point[] points = point.getPointsArround();
                 int bombenanzahl = 0;
-                for(Point apoint : points) {
+                for (Point apoint : points) {
                     if (apoint.getX() >= 0 && apoint.getY() >= 0) {
                         if (apoint.getX() < spielfeld.length && apoint.getY() < spielfeld.length) {
                             if (isMine(apoint)) {
-                                bombenanzahl ++;
+                                bombenanzahl++;
                             }
                         }
                     }
@@ -90,7 +90,7 @@ class Spielfeld {
         for (int i = 0; i < x; i++) {
             do {
                 point.zufallKoord();
-            } while(isMine(point));
+            } while (isMine(point));
             spielfeld[point.getX()][point.getY()] = new Mine();
         }
     }
@@ -105,7 +105,7 @@ class Spielfeld {
         for (int i = 0; i < v; i++) {
             do {
                 point.zufallKoord();
-            } while(isMine(point));
+            } while (isMine(point));
             spielfeld[point.getX()][point.getY()].aufdecken();
         }
     }
@@ -192,8 +192,9 @@ class Spielfeld {
     }
 
     /**
-    *  Die Methode überprüft ob alle Felder des Spielfelds bereits betreten wurden
-    *  Falls ja wird das Spiel als gewonnen bezeichnet
+    * Die Methode überprüft ob alle Felder des Spielfelds bereits betreten wurden
+    * Falls ja wird das Spiel als gewonnen bezeichnet
+    * @return true = wenn Spiel gewonnen ist
     */
     public boolean gewonnen() {
         int laenge = spielfeld.length;

@@ -17,8 +17,8 @@ public class Point {
     
     /**
     * Kostruktor der Klasse Point
-    * @param x = übergebener Wert für x
-    * @param y = übergebener Wert für y
+    * @param pX = übergebener Wert für x
+    * @param pY = übergebener Wert für y
     */
     public Point(int pX, int pY) {
         x = pX;
@@ -28,10 +28,10 @@ public class Point {
 
 
     /**
-     * Konstruktor der Klasse Point
-     * @param pMax Größe des Spielfeld, maximalster Wert für Koordinaten
-     */
-    public Point (int pMax) {
+    * Konstruktor der Klasse Point
+    * @param pMax = übergebener Wert für Max
+    */
+    public Point(int pMax) {
         x = 0;
         y = 0;
         max = pMax;
@@ -45,7 +45,7 @@ public class Point {
     * Gibt Koordinate x wieder
     * @return Koordinate x
     */
-    public int getX(){
+    public int getX() {
         return x;
     }
 
@@ -53,7 +53,7 @@ public class Point {
     * Gibt Koordinate y wieder
     * @return Koordinate y
     */
-    public int getY(){
+    public int getY() {
         return y;
     }
 
@@ -91,7 +91,7 @@ public class Point {
                 }
                 Point point = new Point((x + i), (y + j));
                 points[location] = point;
-                location ++;
+                location++;
             }
         }
 		return points;

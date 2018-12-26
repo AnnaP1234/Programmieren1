@@ -105,7 +105,7 @@ public class Reader {
      * @return true wenn Werte im Wertebereich liegen
     */
     private boolean isOkAktion(int a) {
-        if ((a == 1) || (a==2)) {
+        if ((a == 1) || (a == 2)) {
             return true;
         }
         return false;
