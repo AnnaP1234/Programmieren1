@@ -3,8 +3,7 @@
 * @author Anna Panzer 4509268 Gruppe 2A
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
-public class Mine implements IFeld
-{
+public class Mine implements IFeld {
     // region vars
 
     private char symbol;
@@ -43,11 +42,10 @@ public class Mine implements IFeld
     }
 
     /**
-    * Feld wird entschärft
+    * Feld wird entschärft und Symbol des Felds wird auf 'entschärft' geändert
     * @return true wenn Feld entschärft wurde
     */
-    public boolean entschaerfen()
-    {
+    public boolean entschaerfen() {
         symbol = '!';
         return true;
     }
@@ -56,8 +54,7 @@ public class Mine implements IFeld
     * Feld wird aufgedeckt und betreten wird auf true gesetzt
     * @return false wenn das Feld aufgedeckt wird
     */
-    public boolean aufdecken()
-    {
+    public boolean aufdecken() {
         betreten = true;
         return false;
     }
