@@ -40,8 +40,8 @@ class Spielfeld {
 
         Point point = new Point(n - 1);
         int max = (n * n) - 2;
-        for (int i = 0; i < 10; i++ ) {
-            for (int y = 0; y < 10; y++) {
+        for (int i = 0; i < n; i++ ) {
+            for (int y = 0; y < n; y++) {
 
                 spielfeld[i][y] = new Unvermint();
                 //System.out.println(spielfeld[i][y].getSymbol());
