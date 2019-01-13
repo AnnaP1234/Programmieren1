@@ -216,18 +216,50 @@ public class Tree {
     }
     
     public String entarteterBaum() {
-        if (ueberpruefeEntartet()) {
+        if (ueberpruefeEntartetRechts() || ueberpruefeEntartetLinks()) {
             return "ja";
         } else {
             return "nein";
         }
     }
     
-    public boolean ueberpruefeEntartet() {
+    public boolean ueberpruefeEntartetLinks() {
+        if (leftChild != null && rightChild == null) {
+            return ueberpruefeEntartetLinks(leftChild);
+        }
+        if (leftChild == null && rightChild == null) {
+            return true;
+        }
         return false;
     }
     
-    public boolean ueberpruefeEntartet(Tree parent) {
+    public boolean ueberpruefeEntartetLinks(Tree parent) {
+        if (parent.leftChild != null && parent.rightChild == null) {
+            return ueberpruefeEntartetLinks(parent.leftChild);
+        }
+        if (parent.leftChild == null && parent.rightChild == null) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean ueberpruefeEntartetRechts() {
+        if (leftChild == null && rightChild != null) {
+            return ueberpruefeEntartetRechts(rightChild);
+        }
+        if (leftChild == null && rightChild == null) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean ueberpruefeEntartetRechts(Tree parent) {
+        if (parent.leftChild == null && parent.rightChild != null) {
+            return ueberpruefeEntartetRechts(parent.rightChild);
+        }
+        if (parent.leftChild == null && parent.rightChild == null) {
+            return true;
+        }
         return false;
     }
     // endregion methods

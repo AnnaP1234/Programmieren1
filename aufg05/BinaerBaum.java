@@ -6,7 +6,7 @@
 public class BinaerBaum {
     public static void main( String[] args) {
         Tree t = new Tree(7);
-        int[] numbers = {4, 15, 2, 6, 9, 19, 8};
+        int[] numbers = {5, 4, 3, 2};
         int wert = 30;
         
         for (int number : numbers) {
