@@ -132,7 +132,21 @@ public class Tree {
         if (leftChild != null && rightChild == null) {
              return "(" + leftChild.toString() + ")" + value;
         }
-            return "" + value + "";
+        return "" + value + "";
+        
+    }
+// 
+    public int[] convertTreeToArray() {
+        if (leftChild != null && rightChild != null) {
+            return "(" + leftChild.convertTreeToArray() + ") " + value + " (" + rightChild.convertTreeToArray() + ")";
+        }
+        if (leftChild == null && rightChild != null) {
+             return value + "(" + rightChild.convertTreeToArray() + ")";
+        }
+        if (leftChild != null && rightChild == null) {
+             return int[] {leftChild.convertTreeToArray()};
+        }
+        return "" + value + "";
         
     }
     
