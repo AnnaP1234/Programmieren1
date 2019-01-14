@@ -101,7 +101,7 @@ public class Tree {
         }
     }
     
-    public boolean ueberpruefeWert(int wert) {
+    private boolean ueberpruefeWert(int wert) {
         if (wert < value) {
             if (leftChild == null) {
                 return false;
