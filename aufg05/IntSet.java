@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 public class IntSet {
 
     // region vars
@@ -48,10 +51,11 @@ public class IntSet {
         }
         Tree ausgabe = new Tree();
     // Tree to array??
-        int[] items = this.items.convertTreeToArray.toArray();
-        int[] otherArray = other.convertTreeToArray.toArray();
+        ArrayList<Integer> list = this.items.convertTreeToArray();
+        int[] items = list.toArray(new int[list.size()]);
+        int[] otherArray = other.getItems().convertTreeToArray();
         for (int item : items) {
-            for (int value : other) {
+            for (int value : otherArray) {
                 if (item == value) {
                     ausgabe.insert(item);
                 } else {
@@ -68,8 +72,8 @@ public class IntSet {
     }
 
     public IntSet intersection(IntSet other) {
-        if (containsOnlyInts(this.getItems()) || containsOnlyInts(other.getItems())) {
-            throw new 
+        if (other == null) {
+            throw new NullPointerException();
         }
     }
 
@@ -78,8 +82,6 @@ public class IntSet {
     }
 
     public String toString() {
-        System.out.print("{");
-        for 
     }
 
     // endregion methods

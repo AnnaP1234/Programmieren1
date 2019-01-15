@@ -3,6 +3,9 @@
 * @author Anna Panzer 4509268 Gruppe 2A
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
+
+import java.util.ArrayList;
+
 public class Tree {
 
     // region vars
@@ -17,6 +20,10 @@ public class Tree {
 
     public Tree(int pValue) {
         value = pValue;
+    }
+
+    public Tree() {
+        value = -1;
     }
 
     // endregion ctor
@@ -49,6 +56,9 @@ public class Tree {
      * @param newValue Der einzufügende Wert
      */
     public void insert(int newValue) {
+        if (this.value == -1) {
+            this.value = newValue;
+        }
         if (newValue < value) {
             if (leftChild == null) {
                 leftChild = new Tree(newValue);
@@ -101,7 +111,7 @@ public class Tree {
         }
     }
     
-    private boolean ueberpruefeWert(int wert) {
+    public boolean ueberpruefeWert(int wert) {
         if (wert < value) {
             if (leftChild == null) {
                 return false;
@@ -136,18 +146,22 @@ public class Tree {
         
     }
 
-    public List convertTreeToArray() {
-        List list = Collections.synchronizedList(new ArrayList());
+    public ArrayList<Integer> convertTreeToArray() {
+        ArrayList<Integer> list = new ArrayList<Integer>();
         if (leftChild != null && rightChild != null) {
-            list.Add(leftChild.convertTreeToArray()); 
-            list.Add(rightChild.convertTreeToArray());
+            list.add(value);
+            list.addAll(leftChild.convertTreeToArray()); 
+            list.addAll(rightChild.convertTreeToArray());
         }
         if (leftChild == null && rightChild != null) {
-            list.Add(rightChild.convertTreeToArray());
+            list.add(value);
+            list.addAll(rightChild.convertTreeToArray());
         }
         if (leftChild != null && rightChild == null) {
-            list.Add(leftChild.convertTreeToArray());
+            list.add(value);
+            list.addAll(leftChild.convertTreeToArray());
         }
+        list.add(value);
         return list;
     }
     
