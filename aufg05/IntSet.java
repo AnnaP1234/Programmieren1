@@ -15,10 +15,12 @@ public class IntSet {
         this.items = null;
     }
 
-    public IntSet(int[] items) {
-        for (int item : items) {
-            this.items.insert(item);
+    public IntSet(int[] values) {
+        Tree items = new Tree();
+        for (int item : values) {
+            items.insert(item);
         }
+        this.items = items;
     }
 
     public IntSet(Tree items) {
@@ -50,10 +52,10 @@ public class IntSet {
             throw new NullPointerException();
         }
         Tree ausgabe = new Tree();
-    // Tree to array??
         ArrayList<Integer> list = this.items.convertTreeToArray();
-        int[] items = list.toArray(new int[list.size()]);
-        int[] otherArray = other.getItems().convertTreeToArray();
+        Integer[] items = list.toArray(new Integer[list.size()]);
+        list = other.getItems().convertTreeToArray();
+        Integer[] otherArray = list.toArray(new Integer[list.size()]);
         for (int item : items) {
             for (int value : otherArray) {
                 if (item == value) {
@@ -68,20 +70,59 @@ public class IntSet {
     }
 
     private boolean containsOnlyInts(Tree values) {
-
+        return true;
     }
 
     public IntSet intersection(IntSet other) {
         if (other == null) {
             throw new NullPointerException();
         }
+        Tree ausgabe = new Tree();
+        ArrayList<Integer> list = this.items.convertTreeToArray();
+        Integer[] items = list.toArray(new Integer[list.size()]);
+        list = other.getItems().convertTreeToArray();
+        Integer[] otherArray = list.toArray(new Integer[list.size()]);
+        for (int item : items) {
+            boolean inside = false;
+            for (int value : otherArray) {
+                if (item == value) {
+                    inside = true;
+                }
+            }
+            if(inside) {
+                ausgabe.insert(item);
+            }
+        }
+        for (int value : otherArray) {
+            boolean inside = false;
+            for (int item : items) {
+                if (item == value) {
+                    inside = true;
+                }
+            }
+            if(inside) {
+                ausgabe.insert(value);
+            }
+        }
+        return new IntSet(ausgabe);
     }
 
     public boolean equals(Object x) {
-
+        return true;
     }
 
     public String toString() {
+        String ausgabe = "{";
+        String trennzeichen = " ";
+        ArrayList<Integer> list = this.items.convertTreeToArray();
+        Integer[] items = list.toArray(new Integer[list.size()]);
+        for (int item : items) {
+            ausgabe = ausgabe + trennzeichen + item;
+            trennzeichen = "; ";
+        }
+        ausgabe += " }";
+        return ausgabe;
+
     }
 
     // endregion methods

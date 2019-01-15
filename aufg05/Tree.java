@@ -149,16 +149,13 @@ public class Tree {
     public ArrayList<Integer> convertTreeToArray() {
         ArrayList<Integer> list = new ArrayList<Integer>();
         if (leftChild != null && rightChild != null) {
-            list.add(value);
             list.addAll(leftChild.convertTreeToArray()); 
             list.addAll(rightChild.convertTreeToArray());
         }
         if (leftChild == null && rightChild != null) {
-            list.add(value);
             list.addAll(rightChild.convertTreeToArray());
         }
         if (leftChild != null && rightChild == null) {
-            list.add(value);
             list.addAll(leftChild.convertTreeToArray());
         }
         list.add(value);
