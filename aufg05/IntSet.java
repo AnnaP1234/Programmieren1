@@ -59,10 +59,16 @@ public class IntSet {
         for (int item : items) {
             for (int value : otherArray) {
                 if (item == value) {
-                    ausgabe.insert(item);
+                    if(!ausgabe.ueberpruefeWert(item)) {
+                        ausgabe.insert(item);
+                    }
                 } else {
-                    ausgabe.insert(item);
-                    ausgabe.insert(value);
+                    if(!ausgabe.ueberpruefeWert(item)) {
+                        ausgabe.insert(item);
+                    }
+                    if(!ausgabe.ueberpruefeWert(value)) {
+                        ausgabe.insert(value);
+                    }
                 }
             }
         }
@@ -90,7 +96,9 @@ public class IntSet {
                 }
             }
             if(inside) {
-                ausgabe.insert(item);
+                if(!ausgabe.ueberpruefeWert(item)) {
+                    ausgabe.insert(item);
+                }
             }
         }
         for (int value : otherArray) {
@@ -101,7 +109,9 @@ public class IntSet {
                 }
             }
             if(inside) {
-                ausgabe.insert(value);
+                if(!ausgabe.ueberpruefeWert(value)) {
+                    ausgabe.insert(value);
+                }
             }
         }
         return new IntSet(ausgabe);

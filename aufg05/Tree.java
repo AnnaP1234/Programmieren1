@@ -59,14 +59,14 @@ public class Tree {
         if (this.value == -1) {
             this.value = newValue;
         }
-        if (newValue < value) {
+        else if (newValue < value) {
             if (leftChild == null) {
                 leftChild = new Tree(newValue);
             } else {
                 leftChild.insert(newValue);
             }
         }
-        if (newValue >= value) {
+        else if (newValue >= value) {
             if (rightChild == null) {
                 rightChild = new Tree(newValue);
             } else {
@@ -126,10 +126,7 @@ public class Tree {
                 return rightChild.ueberpruefeWert(wert);
             }
         }
-        if (wert == value) {
-            return true;
-        }
-        return false;
+        return true;
     }
     
     public String toString() {
@@ -143,7 +140,6 @@ public class Tree {
              return "(" + leftChild.toString() + ")" + value;
         }
         return "" + value + "";
-        
     }
 
     public ArrayList<Integer> convertTreeToArray() {
