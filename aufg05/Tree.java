@@ -135,19 +135,20 @@ public class Tree {
         return "" + value + "";
         
     }
-// 
-    public int[] convertTreeToArray() {
+
+    public List convertTreeToArray() {
+        List list = Collections.synchronizedList(new ArrayList());
         if (leftChild != null && rightChild != null) {
-            return "(" + leftChild.convertTreeToArray() + ") " + value + " (" + rightChild.convertTreeToArray() + ")";
+            list.Add(leftChild.convertTreeToArray()); 
+            list.Add(rightChild.convertTreeToArray());
         }
         if (leftChild == null && rightChild != null) {
-             return value + "(" + rightChild.convertTreeToArray() + ")";
+            list.Add(rightChild.convertTreeToArray());
         }
         if (leftChild != null && rightChild == null) {
-             return int[] {leftChild.convertTreeToArray()};
+            list.Add(leftChild.convertTreeToArray());
         }
-        return "" + value + "";
-        
+        return list;
     }
     
     public String entarteterBaum() {

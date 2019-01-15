@@ -43,13 +43,15 @@ public class IntSet {
     }
 
     public IntSet union(IntSet other) {
-        if (containsOnlyInts(this.getItems()) || containsOnlyInts(other.getItems())) {
-            throw new 
+        if (other == null) {
+            throw new NullPointerException();
         }
         Tree ausgabe = new Tree();
     // Tree to array??
-        //for (int item : items) {
-            //for (int value : other) {
+        int[] items = this.items.convertTreeToArray.toArray();
+        int[] otherArray = other.convertTreeToArray.toArray();
+        for (int item : items) {
+            for (int value : other) {
                 if (item == value) {
                     ausgabe.insert(item);
                 } else {
