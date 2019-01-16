@@ -231,5 +231,22 @@ public class Tree {
         return false;
     }
     
+    /**
+    * Methode für funktionale Interface 
+    * Überorüft alle Elemente des Baums auf bestimmten Term
+    * @param op = Interface TreeOperation
+    * @return true = wenn alle Elemente dem Term entsprechen
+    */
+    public boolean forAll(TreeOperation op) {
+        ArrayList<Integer> list = this.convertTreeToArray();
+        Integer[] array = list.toArray(new Integer[list.size()]);
+        for (int i = 0; i < array.length; i++) {
+            if (!op.operation(array[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     // endregion methods
 }
