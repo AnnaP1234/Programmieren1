@@ -1,11 +1,11 @@
+import java.util.ArrayList;
 /**
-*
+* Durch die Klasse Tree können ganze Zahlen in Form eines Binärbaums gespeichert werden und er enthält verschiedene Operationen für einen Binärbaum.
+* Dazu gehören die Ausgabe des kleinsten und größten Werts, sowie die Höhe des Baums.
+* Außerdem kann überprüft werden, ob ein bestimmter Wert im Baum enthalten ist.
 * @author Anna Panzer 4509268 Gruppe 2A
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
-
-import java.util.ArrayList;
-
 public class Tree {
 
     // region vars
@@ -18,10 +18,17 @@ public class Tree {
 
     // region ctor
 
+    /**
+     * erster Konstruktor der Klasse Tree
+     * @param pValue = einzusortierende Wert
+     */
     public Tree(int pValue) {
         value = pValue;
     }
 
+    /**
+     * zweiter Konstruktor der Klasse Tree
+     */
     public Tree() {
         value = -1;
     }
@@ -32,6 +39,7 @@ public class Tree {
 
     /**
      * Gibt den Wert der Wurzel wieder
+     * @return Wert der Wurzel
      */
     public int getValue() {
         return value;
@@ -39,6 +47,7 @@ public class Tree {
 
     /**
      * Gibt den linken Teilbaum wieder
+     * @return linker Teilbaum
      */
     public Tree getLeftChild() {
         return leftChild;
@@ -46,6 +55,7 @@ public class Tree {
 
     /**
      * Gibt den rechten Teilbaum wieder
+     * @return rechter Teilbaum
      */
     public Tree getRightTree() {
         return rightChild;
@@ -53,20 +63,20 @@ public class Tree {
 
     /**
      * Fügt einen neuen Wert in den aktuellen Baum ein
-     * @param newValue Der einzufügende Wert
+     * Werte die kleiner sind als Wurzel kommen in linken Teilbaum
+     * Werte die größer sind als Wurzel kommen in rechten Teilbaum
+     * @param newValue = einzufügende Wert
      */
     public void insert(int newValue) {
         if (this.value == -1) {
             this.value = newValue;
-        }
-        else if (newValue < value) {
+        } else if (newValue < value) {
             if (leftChild == null) {
                 leftChild = new Tree(newValue);
             } else {
                 leftChild.insert(newValue);
             }
-        }
-        else if (newValue >= value) {
+        } else if (newValue >= value) {
             if (rightChild == null) {
                 rightChild = new Tree(newValue);
             } else {
@@ -75,22 +85,35 @@ public class Tree {
         }
     }
     
+    /**
+     * Gibt den kleinsten Wert im Baum wieder, d.h. letzte Werte im linken Teilbaum
+     * @return kleinster Wert
+     */
     public int kleinsterWert() {
-       if (leftChild == null) {
+        if (leftChild == null) {
             return value;
-       } else {
+        } else {
             return leftChild.kleinsterWert();
-       }
+        }
     }
     
+    /**
+     * Gibt den größten Wert im Baum wieder, d.h. letzte Wert im rechten Teilbaum
+     * @return größter Wert
+     */
     public int groessterWert() {
-       if (rightChild == null) {
+        if (rightChild == null) {
             return value;
-       } else {
+        } else {
             return rightChild.groessterWert();
         }
     }
     
+    /**
+     * Berechnet die Höhe des Baums, d.h. wie viele Ebenen an Teilbäumen gibt es
+     * Baum nur mit Wurzel hat die Höhe 1
+     * @return Höhe
+     */
     public int hoehe() {
         int sumR = 1;
         int sumL = 1;
@@ -103,6 +126,12 @@ public class Tree {
         return Math.max(sumL, sumR);
     }
     
+    /**
+     * gibt wieder ob ein vorgegebener Wert im Baum enthalten ist
+     * greift auf Methode ueberpruefeWert() zurück
+     * @param wert = vorgegebene Wert
+     * @return ja = Wert ist vorhanden
+     */
     public String wertVorhanden(int wert) {
         if (ueberpruefeWert(wert)) {
             return "ja";
@@ -111,6 +140,11 @@ public class Tree {
         }
     }
     
+    /**
+     * durchsucht Baum nach einem vorgegebenen Wert
+     * @param wert = vorgegebene Wert
+     * @return true = Wert ist vorhanden
+     */
     public boolean ueberpruefeWert(int wert) {
         if (wert < value) {
             if (leftChild == null) {
@@ -129,19 +163,28 @@ public class Tree {
         return true;
     }
     
+    /**
+     * gibt den Baum auf der Konsole aus
+     * Kindsknoten und Wurzel werden durch Klammern unterschieden
+     * @return Baum unterschieden mit Klammern
+     */
     public String toString() {
         if (leftChild != null && rightChild != null) {
             return "(" + leftChild.toString() + ") " + value + " (" + rightChild.toString() + ")";
         }
         if (leftChild == null && rightChild != null) {
-             return value + "(" + rightChild.toString() + ")";
+            return value + "(" + rightChild.toString() + ")";
         }
         if (leftChild != null && rightChild == null) {
-             return "(" + leftChild.toString() + ")" + value;
+            return "(" + leftChild.toString() + ")" + value;
         }
         return "" + value + "";
     }
 
+    /**
+     * gibt den Baum als Arrayliste wieder
+     * @return Arrayliste
+     */
     public ArrayList<Integer> convertTreeToArray() {
         ArrayList<Integer> list = new ArrayList<Integer>();
         if (leftChild != null && rightChild != null) {
@@ -158,37 +201,29 @@ public class Tree {
         return list;
     }
     
+    /**
+     * gibt wieder ob es sich um einen entarteten Baum handelt
+     * greift auf Methode ueberpruefeEntartet() zurück
+     * @return ja = entarteter Baum
+     */
     public String entarteterBaum() {
-        if (ueberpruefeEntartetRechts() || ueberpruefeEntartetLinks()) {
+        if (ueberpruefeEntartet()) {
             return "ja";
         } else {
             return "nein";
         }
     }
     
-    public boolean ueberpruefeEntartetLinks() {
+    /**
+     * gibt wieder ob es sich um einen entarteten Baum handelt
+     * @return true = entarteter Baum
+     */
+    public boolean ueberpruefeEntartet() {
         if (leftChild != null && rightChild == null) {
-            return ueberpruefeEntartetLinks(leftChild);
+            return leftChild.ueberpruefeEntartet();
         }
-        if (leftChild == null && rightChild == null) {
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean ueberpruefeEntartetLinks(Tree parent) {
-        if (parent.leftChild != null && parent.rightChild == null) {
-            return ueberpruefeEntartetLinks(parent.leftChild);
-        }
-        if (parent.leftChild == null && parent.rightChild == null) {
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean ueberpruefeEntartetRechts() {
         if (leftChild == null && rightChild != null) {
-            return ueberpruefeEntartetRechts(rightChild);
+            return rightChild.ueberpruefeEntartet();
         }
         if (leftChild == null && rightChild == null) {
             return true;
@@ -196,14 +231,5 @@ public class Tree {
         return false;
     }
     
-    public boolean ueberpruefeEntartetRechts(Tree parent) {
-        if (parent.leftChild == null && parent.rightChild != null) {
-            return ueberpruefeEntartetRechts(parent.rightChild);
-        }
-        if (parent.leftChild == null && parent.rightChild == null) {
-            return true;
-        }
-        return false;
-    }
     // endregion methods
 }

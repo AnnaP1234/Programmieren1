@@ -1,4 +1,10 @@
-
+/**
+* Die Klasse IntSet enthält die Menge der ganzen Zahlen, die in den Binärbaum 
+* eingefügt werden soll. Außerdem findet die Ausgabe der Operationen auf der
+* Konsole statt.
+* @author Anna Panzer 4509268 Gruppe 2A
+* @author Sophie Ludewig 4955634 Gruppe 2A 
+*/
 import java.util.ArrayList;
 
 public class IntSet {
@@ -11,10 +17,17 @@ public class IntSet {
 
     // region ctor
 
+    /**
+    * erster Konstruktor der Klasse IntSet
+    */
     public IntSet() {
         this.items = null;
     }
 
+    /**
+    * zweiter Konstruktor der Klasse IntSet
+    * @param values = einzufügende Werte
+    */
     public IntSet(int[] values) {
         Tree items = new Tree();
         for (int item : values) {
@@ -23,6 +36,10 @@ public class IntSet {
         this.items = items;
     }
 
+    /**
+    * dritter Konstruktor der Klasse IntSet
+    * @param items = einzufügender Wert
+    */
     public IntSet(Tree items) {
         this.items = items;
     }
@@ -31,6 +48,9 @@ public class IntSet {
 
     // region get/set
 
+    /**
+    * Methode gibt einzufügende Werte wieder
+    */
     public Tree getItems() {
         return items;
     }
@@ -39,14 +59,28 @@ public class IntSet {
 
     // region methods
 
+    /**
+    *  
+    * @param value 
+    */
     public void insert(int value) {
         // siehe Tree
     }
 
+    /**
+    *  
+    * @param value 
+    * @return 
+    */
     public boolean contains(int value) {
         return items.ueberpruefeWert(value);
     }
 
+    /**
+    *  
+    * @param other 
+    * @return 
+    */
     public IntSet union(IntSet other) {
         if (other == null) {
             throw new NullPointerException();
@@ -75,10 +109,20 @@ public class IntSet {
         return new IntSet(ausgabe);
     }
 
+    /**
+    *  
+    * @param values  
+    * @return 
+    */
     private boolean containsOnlyInts(Tree values) {
         return true;
     }
 
+    /**
+    *  
+    * @param other 
+    * @return 
+    */
     public IntSet intersection(IntSet other) {
         if (other == null) {
             throw new NullPointerException();
@@ -117,10 +161,19 @@ public class IntSet {
         return new IntSet(ausgabe);
     }
 
+    /**
+    *  
+    * @param 
+    * @return 
+    */
     public boolean equals(Object x) {
         return true;
     }
 
+    /**
+    * Gibt den Baum auf der Konsole wieder
+    * @return Ausgabe auf Konsole
+    */
     public String toString() {
         String ausgabe = "{";
         String trennzeichen = " ";

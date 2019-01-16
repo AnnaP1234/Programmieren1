@@ -1,5 +1,7 @@
 /**
-*
+* Die Klasse IntSetMain enthält die Menge der ganzen Zahlen, die in den Binärbaum 
+* eingefügt werden soll. Außerdem findet die Ausgabe der Operationen auf der
+* Konsole statt.
 * @author Anna Panzer 4509268 Gruppe 2A
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
