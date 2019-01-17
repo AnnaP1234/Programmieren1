@@ -162,12 +162,29 @@ public class IntSet {
     }
 
     /**
-    *  
-    * @param 
-    * @return 
+    *  Überprüft, ob sich zwei Mengen gleichen
+    * @param x Ein Objekt x, welches, falls möglich, mit der Mengen verglichen wird
+    * @return true, wenn die Mengen identisch sind
     */
     public boolean equals(Object x) {
-        return true;
+        if(x == null) {
+            return false;
+        }
+        if(x instanceof IntSet) {
+            boolean equals = true;
+            ArrayList<Integer> avalues = ((IntSet) x).getItems().convertTreeToArray();
+            Integer[] values = avalues.toArray(new Integer[avalues.size()]);
+            if(this.items.convertTreeToArray().size() != avalues.size()) {
+                return false;
+            }
+            for (int value : values) {
+                if(equals) {
+                    equals = this.contains(value);
+                }                
+            }
+            return equals;
+        }
+        return false;
     }
 
     /**

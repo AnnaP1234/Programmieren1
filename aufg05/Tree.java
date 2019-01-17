@@ -233,7 +233,7 @@ public class Tree {
     
     /**
     * Methode für funktionale Interface 
-    * Überorüft alle Elemente des Baums auf bestimmten Term
+    * Überprüft alle Elemente des Baums auf bestimmten Term
     * @param op = Interface TreeOperation
     * @return true = wenn alle Elemente dem Term entsprechen
     */
