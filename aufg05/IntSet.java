@@ -19,6 +19,7 @@ public class IntSet {
 
     /**
     * erster Konstruktor der Klasse IntSet
+    * Die Menge ist leer
     */
     public IntSet() {
         this.items = null;
@@ -26,6 +27,7 @@ public class IntSet {
 
     /**
     * zweiter Konstruktor der Klasse IntSet
+    * Fügt die übergebenen Werte in den Baum, die Menge, ein
     * @param values = einzufügende Werte
     */
     public IntSet(int[] values) {
@@ -38,7 +40,8 @@ public class IntSet {
 
     /**
     * dritter Konstruktor der Klasse IntSet
-    * @param items = einzufügender Wert
+    * Menge wird als Baumstruktur übergeben und gesetzt
+    * @param items = einzufügende Menge
     */
     public IntSet(Tree items) {
         this.items = items;
@@ -49,10 +52,11 @@ public class IntSet {
     // region get/set
 
     /**
-    * Methode gibt einzufügende Werte wieder
+    * Methode gibt den Baum wieder, der die Menge verwaltet
+    * @return Der Baum der Menge
     */
     public Tree getItems() {
-        return items;
+        return this.items;
     }
 
     // endregion get/set
@@ -60,30 +64,33 @@ public class IntSet {
     // region methods
 
     /**
-    *  
-    * @param value 
+    * Fügt ein Element in einen Baum ein. Diese Methode liegt in der Tree Klasse
+    * @param value Der einzufügende int-Wert
     */
     public void insert(int value) {
-        // siehe Tree
+        this.items.insert(value);
     }
 
     /**
-    *  
-    * @param value 
-    * @return 
+    * Ermittelt, ob ein Wert in einer Menge enthalten ist.
+    * @param value Der Wert, der auf sein Vorhandensein überprüft werden soll
+    * @return true, wenn der Wert in der Menge enthalten ist
     */
     public boolean contains(int value) {
         return items.ueberpruefeWert(value);
     }
 
     /**
-    *  
-    * @param other 
-    * @return 
+    * Ermittelt die Vereinigung zweier Mengen
+    * Ist kein Object oder ein Object falschen Types übergeben wird eine Exception geworfen.
+    * @param other Die zu schneidene Menge
+    * @return IntSet Die Menge der Elemente, die in jeder der beiden Mengen liegen, ohne Dopplungen
     */
     public IntSet union(IntSet other) {
         if (other == null) {
             throw new NullPointerException();
+        } else if (!(other instanceof IntSet)) {
+            throw new IllegalArgumentException();
         }
         Tree ausgabe = new Tree();
         ArrayList<Integer> list = this.items.convertTreeToArray();
@@ -110,22 +117,16 @@ public class IntSet {
     }
 
     /**
-    *  
-    * @param values  
-    * @return 
-    */
-    private boolean containsOnlyInts(Tree values) {
-        return true;
-    }
-
-    /**
-    *  
-    * @param other 
-    * @return 
+    * Ermittelt den Schnitt zweier Mengen. 
+    * Ist kein Object oder ein Object falschen Types übergeben wird eine Exception geworfen.
+    * @param other Die zu schneidene Menge
+    * @return IntSet Die Menge der Elemente, die genau in beiden Mengen liegen
     */
     public IntSet intersection(IntSet other) {
         if (other == null) {
             throw new NullPointerException();
+        } else if (!(other instanceof IntSet)) {
+            throw new IllegalArgumentException();
         }
         Tree ausgabe = new Tree();
         ArrayList<Integer> list = this.items.convertTreeToArray();
@@ -188,8 +189,8 @@ public class IntSet {
     }
 
     /**
-    * Gibt den Baum auf der Konsole wieder
-    * @return Ausgabe auf Konsole
+    * Gibt den Baum in Mengenschreibweise als String wieder
+    * @return ausgabe Gibt einen String wieder, der den Baum als Menge darstellt.
     */
     public String toString() {
         String ausgabe = "{";
@@ -202,7 +203,6 @@ public class IntSet {
         }
         ausgabe += " }";
         return ausgabe;
-
     }
 
     // endregion methods
