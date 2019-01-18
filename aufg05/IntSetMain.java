@@ -10,7 +10,7 @@ public class IntSetMain {
         Tree t = new Tree(7);
         int[] numbers = {5, 3, 9, 8};
         for (int number : numbers) {
-           t.insert(number);
+            t.insert(number);
         }
         int wert = 30;
 
@@ -22,7 +22,7 @@ public class IntSetMain {
         Tree o = new Tree(10);
         int[] values = {1, 5, 3, 12, 20, 11};
         for (int value : values) {
-           o.insert(value);
+            o.insert(value);
         }
         IntSet other = new IntSet(o);
         System.out.println(other.toString());

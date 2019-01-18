@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
 * Die Klasse IntSet enthält die Menge der ganzen Zahlen, die in den Binärbaum 
 * eingefügt werden soll. Außerdem findet die Ausgabe der Operationen auf der
@@ -5,8 +6,6 @@
 * @author Anna Panzer 4509268 Gruppe 2A
 * @author Sophie Ludewig 4955634 Gruppe 2A 
 */
-import java.util.ArrayList;
-
 public class IntSet {
 
     // region vars
@@ -100,14 +99,14 @@ public class IntSet {
         for (int item : items) {
             for (int value : otherArray) {
                 if (item == value) {
-                    if(!ausgabe.ueberpruefeWert(item)) {
+                    if (!ausgabe.ueberpruefeWert(item)) {
                         ausgabe.insert(item);
                     }
                 } else {
-                    if(!ausgabe.ueberpruefeWert(item)) {
+                    if (!ausgabe.ueberpruefeWert(item)) {
                         ausgabe.insert(item);
                     }
-                    if(!ausgabe.ueberpruefeWert(value)) {
+                    if (!ausgabe.ueberpruefeWert(value)) {
                         ausgabe.insert(value);
                     }
                 }
@@ -140,8 +139,8 @@ public class IntSet {
                     inside = true;
                 }
             }
-            if(inside) {
-                if(!ausgabe.ueberpruefeWert(item)) {
+            if (inside) {
+                if (!ausgabe.ueberpruefeWert(item)) {
                     ausgabe.insert(item);
                 }
             }
@@ -153,8 +152,8 @@ public class IntSet {
                     inside = true;
                 }
             }
-            if(inside) {
-                if(!ausgabe.ueberpruefeWert(value)) {
+            if (inside) {
+                if (!ausgabe.ueberpruefeWert(value)) {
                     ausgabe.insert(value);
                 }
             }
@@ -168,18 +167,18 @@ public class IntSet {
     * @return true, wenn die Mengen identisch sind
     */
     public boolean equals(Object x) {
-        if(x == null) {
+        if  (x == null) {
             return false;
         }
-        if(x instanceof IntSet) {
+        if (x instanceof IntSet) {
             boolean equals = true;
             ArrayList<Integer> avalues = ((IntSet) x).getItems().convertTreeToArray();
             Integer[] values = avalues.toArray(new Integer[avalues.size()]);
-            if(this.items.convertTreeToArray().size() != avalues.size()) {
+            if (this.items.convertTreeToArray().size() != avalues.size()) {
                 return false;
             }
             for (int value : values) {
-                if(equals) {
+                if (equals) {
                     equals = this.contains(value);
                 }                
             }
