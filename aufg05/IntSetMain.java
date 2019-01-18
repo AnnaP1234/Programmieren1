@@ -7,30 +7,30 @@
 */
 public class IntSetMain {
     public static void main( String[] args) {
-        Tree t = new Tree(7);
-        int[] numbers = {5, 3, 9, 8};
-        for (int number : numbers) {
-            t.insert(number);
+        try {
+            int[] numbers = {7, 5, 3, 9, 8};
+            Tree t = new Tree(numbers);
+
+            IntSet intSet = new IntSet(t);
+            System.out.println("Ausgabe des Baums: " + intSet.getItems().toString());
+            
+            System.out.println(intSet.toString());
+
+            int[] values = {10, 1, 5, 3, 12, 20, 11};
+            Tree o = new Tree(values);
+            
+            IntSet other = new IntSet(o);
+            System.out.println(other.toString());
+            System.out.println("Ausgabe der Vereinigung: " + intSet.union(other).toString());
+            
+            System.out.println("Ausgabe des Baums der Vereinigung: " + intSet.union(other).getItems().toString());
+
+            System.out.println("Ausgabe des Schnitts: " + intSet.intersection(other).toString());
+
+            intSet.union(null);
+        } catch(Exception e) {
+            System.out.println("Es ist ein Fehler aufgetreten. " + e);
         }
-        int wert = 30;
-
-        IntSet intSet = new IntSet(t);
-        System.out.println("Ausgabe des Baums: " + intSet.getItems().toString());
-        
-        System.out.println(intSet.toString());
-
-        Tree o = new Tree(10);
-        int[] values = {1, 5, 3, 12, 20, 11};
-        for (int value : values) {
-            o.insert(value);
-        }
-        IntSet other = new IntSet(o);
-        System.out.println(other.toString());
-        System.out.println(intSet.union(other).toString());
-        
-        System.out.println("Ausgabe des Baums: " + intSet.union(other).getItems().toString());
-
-        System.out.println(intSet.intersection(other).toString());
         
     }
 }

@@ -82,6 +82,7 @@ public class IntSet {
     /**
     * Ermittelt die Vereinigung zweier Mengen
     * Ist kein Object oder ein Object falschen Types übergeben wird eine Exception geworfen.
+    * Da passende Exception-Klassen bereits existieren können diese verwendet werden. Dies spart Zeit.
     * @param other Die zu schneidene Menge
     * @return IntSet Die Menge der Elemente, die in jeder der beiden Mengen liegen, ohne Dopplungen
     */
@@ -118,6 +119,7 @@ public class IntSet {
     /**
     * Ermittelt den Schnitt zweier Mengen. 
     * Ist kein Object oder ein Object falschen Types übergeben wird eine Exception geworfen.
+    * Da passende Exception-Klassen bereits existieren können diese verwendet werden. Dies spart Zeit.
     * @param other Die zu schneidene Menge
     * @return IntSet Die Menge der Elemente, die genau in beiden Mengen liegen
     */

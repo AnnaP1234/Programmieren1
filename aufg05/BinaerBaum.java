@@ -11,6 +11,7 @@ public class BinaerBaum {
         Tree t = new Tree(7);
         //einzusortierende Werte
         int[] numbers = {4, 6, 5, 2, 1, 3, 15, 19, 11, 9, 13, 21};
+
         int wert = 30;
         
         for (int number : numbers) {
@@ -19,16 +20,16 @@ public class BinaerBaum {
 
         //Ausgabe der Operationen
         System.out.println("Kleinster Wert: " + t.kleinsterWert());
-        System.out.println("Größter Wert: " + t.groessterWert());
-        System.out.println("Höhe: " + t.hoehe());
-        System.out.println("Ist Wert " + wert + " vorhanden: " + t.wertVorhanden(wert));
+        System.out.println("Groesster Wert: " + t.groessterWert());
+        System.out.println("Hoehe: " + t.hoehe());
+        System.out.println("Ist Wert " + wert + " vorhanden: " + t.convertBoolean(t.ueberpruefeWert(wert)));
         System.out.println("Ausgabe des Baums: " + t.toString());
-        System.out.println("Entartet: " + t.entarteterBaum());
+        System.out.println("Entartet: " + t.convertBoolean(t.ueberpruefeEntartet()));
         
         boolean kleinerZwanzig = t.forAll(v -> v < 20);
-        System.out.println("Alle Werte kleiner 20?: " + kleinerZwanzig);
+        System.out.println("Alle Werte kleiner 20: " + t.convertBoolean(kleinerZwanzig));
         
         boolean groesserZehn = t.forAll(v -> v > 10);
-        System.out.println("Alle Werte größer 10?: " + groesserZehn);
+        System.out.println("Alle Werte groesser 10: " + t.convertBoolean(groesserZehn));
     }
 }

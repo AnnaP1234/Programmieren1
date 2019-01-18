@@ -33,6 +33,16 @@ public class Tree {
         value = -1;
     }
 
+    /**
+     * dritter Konstruktor der Klasse Tree
+     * @param values die in den Baum einzufügenden Werte
+     */
+    public Tree(int[] values) {
+        for(int value : values) {
+            insert(value);
+        }
+    }
+
     // endregion ctor
 
     // region methods
@@ -132,12 +142,11 @@ public class Tree {
      * @param wert = vorgegebene Wert
      * @return ja = Wert ist vorhanden
      */
-    public String wertVorhanden(int wert) {
-        if (ueberpruefeWert(wert)) {
+    public String convertBoolean(boolean wert) {
+        if (wert) {
             return "ja";
-        } else {
-            return "nein";
         }
+        return "nein";
     }
     
     /**
@@ -203,19 +212,6 @@ public class Tree {
     
     /**
      * gibt wieder ob es sich um einen entarteten Baum handelt
-     * greift auf Methode ueberpruefeEntartet() zurück
-     * @return ja = entarteter Baum
-     */
-    public String entarteterBaum() {
-        if (ueberpruefeEntartet()) {
-            return "ja";
-        } else {
-            return "nein";
-        }
-    }
-    
-    /**
-     * gibt wieder ob es sich um einen entarteten Baum handelt
      * @return true = entarteter Baum
      */
     public boolean ueberpruefeEntartet() {
@@ -232,7 +228,7 @@ public class Tree {
     }
     
     /**
-    * Methode für funktionale Interface 
+    * Methode für funktionales Interface 
     * Überprüft alle Elemente des Baums auf bestimmten Term
     * @param op = Interface TreeOperation
     * @return true = wenn alle Elemente dem Term entsprechen
