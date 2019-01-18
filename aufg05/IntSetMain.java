@@ -29,7 +29,7 @@ public class IntSetMain {
 
             intSet.union(null);
         } catch(Exception e) {
-            System.out.println("Es ist ein Fehler aufgetreten. " + e);
+            System.err.println("[ERROR] Es ist ein Fehler aufgetreten. " + e);
         }
         
     }
